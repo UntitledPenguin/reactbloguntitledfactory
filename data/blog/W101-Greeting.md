@@ -1,10 +1,12 @@
 ---
 title: 第一周 打招呼贴！
-date: '2024-05-06'
-tags: ['Random Talk','Greeting!']
-draft: false
+date: 2024-05-06
+tags:
+  - Random
+  - Hello
+draft: true
 summary: draft post
-images: []
+images:
 ---
 
 网站施工中……

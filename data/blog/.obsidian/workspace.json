@@ -11,8 +11,12 @@
             "id": "27e03498516b4d8e",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "W101-Greeting.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "W101-Greeting.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "W101-Greeting.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "W101-Greeting.md"
+              }
             }
           }
         ]
@@ -138,8 +146,15 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "f1021b37c7ada237",
+  "active": "27e03498516b4d8e",
   "lastOpenFiles": [
-    "Greeting.md"
+    "W103-KnowledgeManagement.mdx",
+    "未命名.md",
+    "W102-Beginning-Words.mdx",
+    "W101-Greeting.md",
+    "New Project.mdx",
+    "Manual/new-features-in-v1.mdx",
+    "Manual/deriving-ols-estimator.mdx",
+    "Manual/github-markdown-guide.mdx"
   ]
 }
