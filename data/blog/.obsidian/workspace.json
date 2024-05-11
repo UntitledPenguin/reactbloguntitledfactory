@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "W201-Heap-Application.mdx",
+                "file": "Manual/introducing-tailwind-nextjs-starter-blog.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "W201-Heap-Application.mdx",
+                "file": "Manual/introducing-tailwind-nextjs-starter-blog.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "W201-Heap-Application.mdx",
+                "file": "Manual/introducing-tailwind-nextjs-starter-blog.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "W201-Heap-Application.mdx"
+                "file": "Manual/introducing-tailwind-nextjs-starter-blog.mdx"
               }
             }
           }
@@ -148,8 +148,11 @@
   },
   "active": "27e03498516b4d8e",
   "lastOpenFiles": [
-    "W103-KnowledgeManagement.mdx",
+    "Manual/guide-to-using-images-in-nextjs.mdx",
+    "Manual/deriving-ols-estimator.mdx",
+    "Manual/code-sample.mdx",
     "W201-Heap-Application.mdx",
+    "W103-KnowledgeManagement.mdx",
     "W201-堆 和 堆的应用.mdx",
     "W201-Heap and application.mdx",
     "W101-Greeting.md",
@@ -157,7 +160,6 @@
     "未命名.md",
     "New Project.mdx",
     "Manual/new-features-in-v1.mdx",
-    "Manual/deriving-ols-estimator.mdx",
     "Manual/github-markdown-guide.mdx"
   ]
 }
