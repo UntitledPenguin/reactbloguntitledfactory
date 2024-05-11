@@ -1,0 +1,194 @@
+---
+title: 堆 和 堆的应用
+date: 2024-05-06
+tags:
+  - DataStructure
+  - Algorithm
+  - Python
+draft: false
+summary: Introduction to Heap Data Structure 堆入门介绍
+authors:
+  - default
+images:
+---
+
+<导言>
+因为上周在看Dijkstra的优化中涉及到了堆，这周开始深入看一点数据结构，就从堆开始吧。
+
+### 堆是什么？为什么使用堆？
+
+堆（Heap），是一种基于树的数据结构，通常用来满足某一系列数据的最大值、最小值的快速取用。堆通常基于完全二叉树（也有一些奇怪的堆不基于…不在此讨论）来构造，一个合格的堆满足以下的属性：
+
+- **最小堆：** 每个节点的值都小于或等于其子节点的值。
+- **or**（二者不可得兼）
+- **最大堆：** 每个节点的值都大于或等于其子节点的值。
+
+虽说采用树来理解堆，但其完全二叉树的属性又使得堆可以直接用普通的list来存储，因为其下标和树中的位置是一一对应的：只需要利用每一个根节点和其子节点之间的index关系就可以快速查找到其子节点 例如，i结点的子节点就是 2*i, 2*i+1 (此处的结果依据起始下标有所不同，此处以从1开始为例)。同理，如果要寻找i节点的父节点只需要使用 i/2（依情况取整）。根据这个特性，查找、删除、和插入元素的时间复杂度也可以维持在 log2 n（也可以理解为堆的高度/层数）。这样的速度比每次都通过O(n)来扫描队列的笨办法实现了降维打击。
+
+### 堆的基本操作
+
+堆的基本操作主要包含：
+
+##### 插入（insert and bubble up）O（logn）
+1）Insert：在list的尾部，也就是堆的最末尾插入一个元素。
+2）Bubble up: 不断地将其与其父交换直到满足堆的属性（也就是所有节点都比其子节点大/小）
+
+##### 提取（extract and bubble down）O（logn）
+
+1）Extract ：提取栈顶的最小值/最大值，然后将堆尾的元素直接空降根节点
+2）Bubble down：然后不断将这个空降兵往下踹 直至满足堆的属性。
+
+##### 删除（delete）：O（logn）
+1）将下标为x的结点删除
+2）同样的将全堆最末元素换到此处再bubble down（和提取同理）
+
+##### 建堆（Heapify）O（n）
+1）将整个初始数列扔进堆里
+2）从第一个非叶结点（n/2）开始逐级向上遍历，在每个结点处heapify以其为根节点的子堆
+总的时间复杂度为 $\sum_{i=1}^{log_2n}i*n/2^i=n$
+	注意：每层的结点数以及每个结点的heapify所需的时间：也就是在每个结点处各自进行“insert/bubble down”所需的时间，只与堆的高度有关）
+
+==当然， 查询:  只需调用堆顶的元素即可 O(1)。o(*￣▽￣*)ブ==
+
+#### Heaq in Python
+
+在Python中，自带的模块Heapq让我们零成本实现heap操作（瞬间实现上岗）。让我们看一段代码了解一下heapq的基本操作：
+```
+import heapq
+import random
+
+  
+#我们使用random生成10个随机元素，然后把它们扔进堆里
+h = [random.randint(1, 100) for _ in range(10)]
+print("随机生成的数列：", h)
+
+
+heapq.heapify(h)
+print("转换为最小堆后的数列：", h)
+#直接调用最小值：
+min = h[0]
+print("最小元素：", min)
+print("剩余的堆元素：", h)
+
+#提取最小值
+min = heapq.heappop(h)
+print("弹出的最小元素：", min)
+print("剩余的堆元素：", h)
+
+# 向堆中插入一个新的随机数字
+x = random.randint(1, 100)
+heapq.heappush(h, x)
+print("插入新元素后的堆：", h)
+
+```
+运行结果：
+
+```
+随机生成的数列： [93, 40, 22, 80, 41, 29, 15, 3, 32, 12]
+转换为最小堆后的数列： [3, 12, 15, 32, 41, 29, 22, 80, 40, 93]
+最小元素： 3
+剩余的堆元素： [3, 12, 15, 32, 41, 29, 22, 80, 40, 93]
+弹出的最小元素： 3
+剩余的堆元素： [12, 32, 15, 40, 41, 29, 22, 80, 93]
+插入新元素后的堆： [12, 12, 15, 40, 32, 29, 22, 80, 93, 41]
+转换为最大堆后的数列： [93, 80, 29, 40, 41, 15, 22, 12, 12, 32]
+最大元素： 93
+剩余的堆元素： [93, 80, 29, 40, 41, 15, 22, 12, 12, 32]
+弹出的最大元素： 93
+剩余的堆元素： [80, 41, 29, 40, 32, 15, 22, 12, 12]
+插入后的堆： [80, 41, 29, 40, 32, 15, 22, 12, 12, 43]
+插入新元素后的堆： [80, 43, 29, 40, 41, 15, 22, 12, 12, 32]
+```
+
+注意Heapq中的heap并不是一个新的class，而是基于list以及其下标来进行堆的维护的。因此，我们在平时使用时，可以直接建立一个空的list，然后直接对它进行堆的各种操作：比如调用heapq.heappush（数组，元素）来将新元素扔进堆里，这样它就具备了堆的属性：
+```
+heap = []
+heapq.heappush(heap, new_element)
+```
+
+### 堆的应用
+
+#### Leetcode小试牛刀：295. Find Median for the Data Stream
+##### 问题描述
+
+The **median** is the middle value in an ordered integer list. If the size of the list is even, there is no middle value, and the median is the mean of the two middle values.
+
+- For example, for `arr = [2,3,4]`, the median is `3`.
+- For example, for `arr = [2,3]`, the median is `(2 + 3) / 2 = 2.5`.
+
+Implement the MedianFinder class:
+
+- `MedianFinder()` initializes the `MedianFinder` object.
+- `void addNum(int num)` adds the integer `num` from the data stream to the data structure.
+- `double findMedian()` returns the median of all elements so far. Answers within `10-5` of the actual answer will be accepted.
+
+这题一看到以为只能用平衡树解决，但是后来看到有说两个堆也可以解决的，尝试做了一下。
+==PS：万恶leetcode里的的heapq模块并不支持最大堆的使用，然后找了一圈发现似乎只能取负了（调包侠愤怒），不过其实也挺快的，只需要在对最大堆做相关操作时保证传递的是取反的值即可。==
+###### 主要思路
+
+核心就是维护两个堆，一个在中位数左边（比中位数小的）的最大堆，一个中位数右边（比中位数大的）的最小堆。
+
+	在加入新数字的时候：
+		1.小于右边堆中的最小值则加入左边堆，否则加入右边堆
+		2.维护堆的平衡：也就是左边堆和右边堆的数量差距不可大于一
+	在维护了这两个堆之后，查询中位数就很简单了，我们分情况讨论一下：
+		1.左边堆大于右边堆，取左边堆（maxheap[0])顶
+		2.右边堆大于左边堆，取右边堆（minheap[0])顶
+		3.两边相等取平均值
+
+```
+import heapq
+
+class MedianFinder(object):
+
+    def __init__(self):
+        self.maxheap=[]
+        self.minheap=[]
+
+    def addNum(self, num):#输入数字
+
+        """
+        :type num: float
+        :rtype: None
+        """
+
+        if not self.minheap or num<self.minheap[0]:
+            heapq.heappush(self.maxheap,-num)
+        else:
+            heapq.heappush(self.minheap,num)
+
+        #rebalance确保两边堆的长度平衡
+        if len(self.maxheap)-len(self.minheap)>1:
+            heapq.heappush(self.minheap,heapq.heappop(self.maxheap)*(-1))
+        elif len(self.minheap)-len(self.maxheap)>1:
+            heapq.heappush(self.maxheap,heapq.heappop(self.minheap)*(-1))  
+  
+    def findMedian(self): #查询中位数
+
+        """
+        :rtype: float
+        """
+
+        if not self.maxheap and not self.minheap:
+            return(None)
+           if len(self.maxheap)>len(self.minheap):
+                self.median=self.maxheap[0]*(-1)
+           elif len(self.maxheap)<len(self.minheap):
+                self.median=self.minheap[0]
+           else:
+            self.median=(self.maxheap[0]*(-1)+self.minheap[0])/2.0
+        return(self.median)
+
+```
+
+总而言之，通过上面的内容很好地说明了堆在处理动态数据/实现优先队列中的作用：其强项就是快速实现最大最小值的查询，而插入删除等操作维护成本也并不高。
+
+在现实生活中，许多数据库的维护、游戏的运作等情况都需要实时处理动态数据，而堆的出现可以极大地简化这些任务。比如，游戏中的事件处理、玩家行为的记录、以及实时的优先级处理等情况都可以借助堆来实现高效的处理（这一段是chatgpt写的）。
+
+---
+
+啊 美好的星期五！
+不对，已经星期六了。
+
+-鹅仔
+2024/5/11 0：49
