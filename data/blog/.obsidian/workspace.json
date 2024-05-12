@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Manual/introducing-tailwind-nextjs-starter-blog.mdx",
+                "file": "W202-BST.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Manual/introducing-tailwind-nextjs-starter-blog.mdx",
+                "file": "W202-BST.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Manual/introducing-tailwind-nextjs-starter-blog.mdx",
+                "file": "W202-BST.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Manual/introducing-tailwind-nextjs-starter-blog.mdx"
+                "file": "W202-BST.mdx"
               }
             }
           }
@@ -148,6 +148,8 @@
   },
   "active": "27e03498516b4d8e",
   "lastOpenFiles": [
+    "Manual/introducing-tailwind-nextjs-starter-blog.mdx",
+    "W202-BST.mdx",
     "Manual/guide-to-using-images-in-nextjs.mdx",
     "Manual/deriving-ols-estimator.mdx",
     "Manual/code-sample.mdx",
@@ -158,8 +160,6 @@
     "W101-Greeting.md",
     "W102-Beginning-Words.mdx",
     "未命名.md",
-    "New Project.mdx",
-    "Manual/new-features-in-v1.mdx",
-    "Manual/github-markdown-guide.mdx"
+    "New Project.mdx"
   ]
 }
