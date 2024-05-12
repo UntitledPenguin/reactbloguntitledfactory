@@ -46,10 +46,13 @@ images:
 
 **查找在第i位的节点值**
 用size（root）记录subtree 的节点数量：
+
+```
 	->a=size（left subtree）
 	if a=i-1 return x
 	if a>=i 那么查询回溯左子树
 	if a<i-1 以 i-a-1回溯查询右子树
+```
 
 ### 平衡树
 
