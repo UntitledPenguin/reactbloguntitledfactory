@@ -10,12 +10,13 @@ summary: Introduction to Heap Data Structure 堆入门介绍
 authors: ['default']
 images:
   - /static/images/cat.gif
+  - /static/images/tech/heapinsert.gif
 ---
 
 导言：
 因为上周在看Dijkstra的优化中涉及到了堆，这周开始深入看一点数据结构，就从堆开始吧。
 
-<img src="/static/images/cat.gif" width="200">
+![Cat](/static/images/cat.gif)
 
 ### 堆是什么？为什么使用堆？
 
@@ -35,10 +36,14 @@ images:
 1）Insert：在list的尾部，也就是堆的最末尾插入一个元素。
 2）Bubble up: 不断地将其与其父交换直到满足堆的属性（也就是所有节点都比其子节点大/小）
 
+![Heap Insert](/static/images/tech/heapinsert.gif)
+
 #### 提取（extract and bubble down）O（logn）
 
 1）Extract ：提取栈顶的最小值/最大值，然后将堆尾的元素直接空降根节点
 2）Bubble down：然后不断将这个空降兵往下踹 直至满足堆的属性。
+
+![Heap Pop](/static/images/tech/heappop.gif)
 
 #### 删除（delete）：O（logn）
 1）将下标为x的结点删除
