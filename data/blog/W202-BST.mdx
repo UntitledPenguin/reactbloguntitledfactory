@@ -103,7 +103,7 @@ images:
 			替罪羊树引入了一个平衡系数alpha（一般采用0.7左右）来检查k处的某个子树大小在k中的占比，若超过一定比例，那么在k处重构。比如取alpha为2/3，若某个发现k处左子树的大小以及占比超过其2/3，那么就在k处对树进行重构：一般将树中节点存入数组后再重新建树即可。在插入新节点时，若发现此处树高过高（例如超过了1/alpha（log2 n）），那么我们向上不断查询直至找到一个平衡系数不合格替罪羊节点然后在替罪羊处重构。
 		
 		图解：
-		![scapegoat](/static/images/tech/scapegoat.JPG)
+		![scapegoat](/static/images/tech/scapegoat.jpg)
 
 	**堆树（treap）**：
 
