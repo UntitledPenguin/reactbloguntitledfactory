@@ -11,10 +11,10 @@ authors: ['default']
 images:
   - /static/images/cat.gif
   - /static/images/tech/BSTrotate.gif
-  - /static/images/tech/AVL.jpg
-  - /static/images/tech/scapegoat.jpg
-  - /static/images/tech/RedBlack.jpg
-  - /static/images/tech/BST.jpg
+  - /static/images/tech/AVL.JPG
+  - /static/images/tech/scapegoat.JPG
+  - /static/images/tech/RedBlack.JPG
+  - /static/images/tech/BST.JPG
 ---
 
 [最后更新 于 2024-05-14]
@@ -25,7 +25,7 @@ images:
 
 二叉搜索树是一种二叉树的树形数据结构，其满足如下特性：
 
-![BST](/static/images/tech/BST.jpg)
+![BST](/static/images/tech/BST.JPG)
 
 - 若二叉搜索树的左子树不为空，则其左子树上所有点的附加权值均小于其根节点的值。 
 - 若二叉搜索树的右子树不为空，则其右子树上所有点的附加权值均大于其根节点的值。
@@ -88,7 +88,7 @@ images:
 				有 k不大于$\log_2 n$ - 即每条路径至多有$\log_2 n+1$个黑色节点
 				又因为每条路径中红色节点数目不超过黑色，所以每条路径的总结点数不超过2$\log_2 n+1$
 		图解：
-		![Red Black Tree](/static/images/tech/RedBlack.jpg)
+		![Red Black Tree](/static/images/tech/RedBlack.JPG)
 
 	**AVL树：**
 
@@ -96,14 +96,14 @@ images:
 			若树平衡，则该值一直得处在-1 0 1之间；否则树失衡，需要对树进行旋转操作来重新平衡。
 
 		图解：
-		![AVL Tree](/static/images/tech/AVL.jpg)
+		![AVL Tree](/static/images/tech/AVL.JPG)
 
 	**替罪羊树**：
 
 			替罪羊树引入了一个平衡系数alpha（一般采用0.7左右）来检查k处的某个子树大小在k中的占比，若超过一定比例，那么在k处重构。比如取alpha为2/3，若某个发现k处左子树的大小以及占比超过其2/3，那么就在k处对树进行重构：一般将树中节点存入数组后再重新建树即可。在插入新节点时，若发现此处树高过高（例如超过了1/alpha（log2 n）），那么我们向上不断查询直至找到一个平衡系数不合格替罪羊节点然后在替罪羊处重构。
 		
 		图解：
-		![scapegoat](/static/images/tech/scapegoat.jpg)
+		![scapegoat](/static/images/tech/scapegoat.JPG)
 
 	**堆树（treap）**：
 
