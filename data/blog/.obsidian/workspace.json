@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "W202-BST.mdx",
+                "file": "W201-Heap-Application.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "W202-BST.mdx",
+                "file": "W201-Heap-Application.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "W202-BST.mdx",
+                "file": "W201-Heap-Application.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "W202-BST.mdx"
+                "file": "W201-Heap-Application.mdx"
               }
             }
           }
@@ -148,8 +148,8 @@
   },
   "active": "27e03498516b4d8e",
   "lastOpenFiles": [
-    "Manual/introducing-tailwind-nextjs-starter-blog.mdx",
     "W202-BST.mdx",
+    "Manual/introducing-tailwind-nextjs-starter-blog.mdx",
     "Manual/guide-to-using-images-in-nextjs.mdx",
     "Manual/deriving-ols-estimator.mdx",
     "Manual/code-sample.mdx",
