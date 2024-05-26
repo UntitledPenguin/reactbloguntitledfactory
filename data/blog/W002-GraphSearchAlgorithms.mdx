@@ -7,7 +7,7 @@ tags:
   - Python
   - Graph
 draft: false
-summary: 此处写描述
+summary: An Introduction to DFS BFS and Deque
 authors:
   - default
 images:
@@ -46,13 +46,13 @@ BFS的搜索过程需要维护一个队列，每次搜索队头所在的结点�
 7.之后的所有在队中的结点已经搜寻不到新节点，按照顺序，依次出队。
 8.此时队列为空，查询结束。
 
-![BFS.gif]（- /static/images/tech/BFS.gif）
+![BFS.gif]（/static/images/tech/BFS.gif）
 
 ### BFS延伸：无向图的联通问题
 
 求一个无向图的联通部分有几个（如下图）：
 
-![connected components.png]（- /static/images/tech/connected components.png）
+![connected components.png]（/static/images/tech/connected components.png）
 
 只需要循环调用每一个未被搜索过的结点，从其开始BFS，将所有搜索到的结点标记为一个连通块：
 
@@ -63,17 +63,19 @@ BFS的搜索过程需要维护一个队列，每次搜索队头所在的结点�
 
 ## 过程解析之DFS
 
-![DFS.gif]（- /static/images/tech/DFS.gif）
+![DFS.gif]（/static/images/tech/DFS.gif）
 
 在深度优先搜索中，我们需要维护的是一个栈（当然有时可以直接以递归调用的形式来实现）：
+
 首先，A结点入栈，虽然连接到了BCD三个结点，但是直接沿着B结点（入栈）进行下一步搜索；
+
 进入B结点后，也继续沿着和B相连的第一个不在栈中的结点E（入栈）搜索，然后一步步搜到H、F、C、G。（为了展现其和BFS的不同，这个例子有点极端）。当搜索到G结点时，已经没有新的结点可以入栈。此时开始依次出栈。由于返回的每一层都没有更新的结点加入，所以CFHEB全部出栈。此时，回到A结点，发现A结点还有相邻的D结点没有被搜索，于是D入栈。D入栈后也没有新节点，D出栈，A出栈。搜索全部结束。可以看到，如果在BFS中，D结点作为直接和A相连的结点应该在第一层搜索中就会入队，但是在DFS中却最后一个才被搜到，这就是DFS和BFS不同的打开方式了——DFS有点像把第一个套娃一直拆到最小的一个再开下一个套娃。
 
 ### DFS延伸：拓扑排序问题
 
 针对有向图，根据图中不同点的联通关系进行排序的全部可能（想象成大学选课中一些课是另一些课的先修课，求上完培养计划可行的课程安排）：
 
-1.可以注意到，深度优先搜索所形成的路径天然就符合拓扑排序的要求
+1. 可以注意到，深度优先搜索所形成的路径天然就符合拓扑排序的要求
 
 2. 参与搜索的有向图不可以有环，否则没有解
 
