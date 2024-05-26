@@ -13,9 +13,9 @@ authors:
 images:
   - /static/images/cat.gif
   - /static/images/tech/BFS.gif
-  - /static/images/tech/connected components.png
+  - /static/images/tech/connectedcomponents.png
   - /static/images/tech/DFS.gif
-  - /static/images/tech/DFS_topological order.gif
+  - /static/images/tech/DFS_topologicalorder.gif
 ---
 
 
@@ -52,7 +52,7 @@ BFS的搜索过程需要维护一个队列，每次搜索队头所在的结点�
 
 求一个无向图的联通部分有几个（如下图）：
 
-![connected components.png](/static/images/tech/connected components.png)
+![connected components](/static/images/tech/connectedcomponents.png)
 
 只需要循环调用每一个未被搜索过的结点，从其开始BFS，将所有搜索到的结点标记为一个连通块：
 
@@ -98,7 +98,7 @@ BFS的搜索过程需要维护一个队列，每次搜索队头所在的结点�
 		->current_label-1（次序向前移动，再返回栈的上一层）
 ````
 		
-![[DFS_topological order.gif]](/static/images/tech/DFS_topological order.gif)
+![DFS_topological order.gif](/static/images/tech/DFS_topologicalorder.gif)
 
 ### Deque in Python
 
