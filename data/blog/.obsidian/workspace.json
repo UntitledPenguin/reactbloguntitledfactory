@@ -13,13 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "W301-Sudoku.mdx",
+                "file": "W301-HashTable.mdx",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "37aef0e840cc12ce",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "W001- ObjectOriented.mdx",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -48,7 +61,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:Game",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -65,13 +78,11 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "6aa7f3c50f156f09",
@@ -87,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "W301-Sudoku.mdx",
+                "file": "W001- ObjectOriented.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "W301-Sudoku.mdx",
+                "file": "W001- ObjectOriented.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -127,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "W301-Sudoku.mdx"
+                "file": "W001- ObjectOriented.mdx"
               }
             }
           }
@@ -135,8 +146,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -148,11 +158,14 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "27e03498516b4d8e",
+  "active": "37aef0e840cc12ce",
   "lastOpenFiles": [
+    "W102-Beginning-Words.mdx",
+    "W001- ObjectOriented.mdx",
+    "未命名.md",
+    "W301-HashTable.mdx",
     "sudokuresult 1.png",
     "sudokuresult.png",
-    "W301-HashTable.mdx",
     "W301-Sudoku.mdx",
     "leetcode01.png",
     "W202-BST.mdx",
@@ -165,8 +178,6 @@
     "Manual/guide-to-using-images-in-nextjs.mdx",
     "Manual/deriving-ols-estimator.mdx",
     "Manual/code-sample.mdx",
-    "W103-KnowledgeManagement.mdx",
-    "W101-Greeting.md",
-    "未命名.md"
+    "W101-Greeting.md"
   ]
 }
