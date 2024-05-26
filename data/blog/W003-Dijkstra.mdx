@@ -1,0 +1,183 @@
+---
+title: 算法入门 | Dijkstra最短路和基于堆的优化
+date: 2024-05-03
+tags:
+  - DataStructure
+  - Algorithm
+  - Python
+  - Heap
+draft: true
+summary: Introduction to Dijkstra's shortest path algorithm
+authors:
+  - default
+images:
+  - /static/images/cat.gif
+  - /static/images/tech/Dijkstra-02.jpg
+  - /static/images/tech/Dijkstra.jpg
+---
+
+[ 最后更新 于 2024-05-03 ]
+
+# Dijkstra 最短路
+
+## 适用范围
+
+最短路是图论问题中最为常见的问题之一。Dijkstra 则是适用于解决单源最短路径（没有负权边）的最广泛使用的算法之一，可以计算从给定起点到图中所有其他节点的最短路径。
+
+## 算法核心
+
+Dijkstra算法的运行是基于贪心策略的：
+
+若我们将图一分为二，一部分是已经计算了最短路的部分{X}（下图中的旧大陆），一部分是未计算的部分{V-X}（下图中的新大陆），那么不妨将一系列联通X和V-X的边称为“桥梁”边。
+
+在这些桥梁边中，我们选择从**A至桥尾距离中最短的路径**，将这座桥连接到的**结点**纳入我们的版图（也就是图中沿ACE这条路到达的E），此时，E就成为了旧大陆的一部分。同时，与E相连的其他原本在新大陆内部的边成为了新的桥梁边，将它们加入桥梁边合集。（注意，原有的“桥梁边”，若两边仍旧分属于旧大陆和新大陆，则依然在桥梁合集之中，例如DF边）反复操作，直至大陆被完全探索（{V-X}为空）。
+
+![Dijkstra.jpg](- /static/images/tech/Dijkstra.jpg)
+
+
+## 算法证明
+
+这个贪心算法为何奏效呢？可以依靠数学归纳法进行证明：
+
+````
+假设命题：对于所有已探寻的结点v，通过Dijkstra贪心策略所找出的贪心路径长度 B[v] 为从A到V节点的真正最短路 S[A->V] 也就是B[v]=S[A->V]。
+
+1）第一次运行的情况：A结点，B[A]=0, S[A->A]=0, 在没有负权边情况下显然满足
+2）假设第k-1次运行已经成立，那么对第k次运行，我们只需证明，对于Dijkstra所加入的新结点w*，没有更短的从A通向w* 的路径：
+
+假设P为从A通向w*（Dijkstra所找到的新结点） 的任意一条路径，那么P内至少包含一条桥梁边（需要穿越旧大陆到新大陆至少一次），我们假设第一次实现穿越的边为（y，z），y属于{X}（旧大陆），z属于{V-X}（新大陆）。我们便可以将P拆分为：
+	P(A->Y)+P(Y->Z)+P(Z->W)
+1 根据归纳假设，b[y]是A到y的最短路径，那么p路径中从S到达Y的距离必然不会超过此前计算的从A到Y的最短路B[y]：
+	P（A->Y）> S(A->Y)=B[y]
+2 根据Dijkstra贪心策略，我们选取的w* 永远满足：B[v*]+l[v*->w*] 是所有通过桥梁边实现穿越的路径中最小的，那么；
+	B[v*]+l[v*->w*]<=B[y]+l[y->z]
+3  又因为没有负权边，因而总有 B[z->w]>=0
+4 整合后得到不等式：
+	P（A->w）=P(A->Y)+P(Y->Z)+P(Z->w)>=B[y]+l[y->z]>=B[v*]+l[v*->w*]
+	也就是在无负权边的情况下，任意P路径长度都不会比Dijkstra贪心策略得到的结果小。
+根据数学归纳法，原假设成立。
+````
+
+![Dijkstra-02.jpg](/static/images/tech/Dijkstra-02.jpg)
+
+## Dijkstra优化：基于堆操作
+
+白痴版Dijstra算法时间复杂度大约在O（n * m）（遍历所有的结点同时以此枚举所有的边），但这并不是最理想的状况。此时，如果我们熟悉堆 这一数据结构，就可以想到利用堆总是把最大值/最小值放在堆顶的属性 将Dijkstra算法的时间复杂度优化到 O（m * logn）：
+
+
+[**堆（Heap）**](https://upfactory.vercel.app/blog/W201-Heap-Application) 是一种基于树的数据结构，通常是一棵完全二叉树，具有以下性质：
+
+- **最小堆：** 每个节点的值都小于或等于其子节点的值。
+- **最大堆：** 每个节点的值都大于或等于其子节点的值。
+
+当我们用一个普通的list来维护堆的时候，由于是完全二叉树，只需要利用每一个根节点和其子节点之间的index关系就可以快速查找到其子节点 例如，i结点的子节点就是 2*i+1, 2*i+2 (！！一定要注意注意节点的下标)。因此如果我们想要删除顶部的元素并保证堆的属性，只需要 log n 次操作就可以完成。
+
+因此，堆的特殊性质能够帮助Dijkstra在寻找最短路的贪心过程中实现时间复杂度从n向logn的优化。
+
+### Heaq in Python
+
+在Python中，自带的模块Heapq让我们零成本实现heap操作。让我们看一段代码了解一下heapq的基本操作：
+```
+import heapq 
+import random
+
+#我们使用random生成10个随机元素，然后把它们扔进堆里
+h = [random.randint(1, 100) for _ in range(10)] 
+print("随机生成的数列：", h) 
+
+heapq.heapify(h) 
+print("转换为最小堆后的数列：", h) 
+
+#查询最小值
+min = heapq.heappop(h) 
+print("弹出的最小元素：", min) 
+print("剩余的堆元素：", h) 
+
+# 向堆中插入一个新的随机数字 
+x = random.randint(1, 100) 
+heapq.heappush(h, x) 
+print("插入新元素后的堆：", h) 
+
+```
+运行结果：
+
+```
+随机生成的数列： [52, 14, 11, 78, 86, 44, 47, 42, 76, 8]
+转换为最小堆后的数列： [8, 14, 11, 42, 52, 44, 47, 78, 76, 86]
+弹出的最小元素： 8
+剩余的堆元素： [11, 14, 44, 42, 52, 86, 47, 78, 76]
+插入新元素后的堆： [11, 14, 44, 42, 51, 86, 47, 78, 76, 52]
+```
+
+注意Heapq中的heap并不是一个新的class，而是基于list以及其下标来进行堆的维护的。因此，我们在平时使用时，可以直接建立一个空的list，然后直接调用heapq.heappush（数组，元素）来将新元素扔进堆里：
+```
+heap = []
+heapq.heappush(heap, new_element)
+```
+
+### Dijkstra代码实现（Heap优化版）：
+
+```
+import heapq
+
+  
+class Graph: #建立Graph类储存边和结点
+
+    def __init__(self):
+
+        self.nodes = set() # initializing a set to store the node code
+
+        self.edges = {} # initializing edge as empty dictionary
+        
+
+    def add_node(self, value):
+
+        self.nodes.add(value) # constructing nodes according to the starting and ending point of edge 
+
+        if value not in self.edges:
+
+            self.edges[value] = {}
+
+
+    def add_edge(self, from_node, to_node, weight):
+
+        self.add_node(from_node)
+
+        self.add_node(to_node)
+
+        self.edges[from_node][to_node] = weight 
+        # Supposing we are dealing with direct graph  在这里采用了有向图，但是Dijkstra也可以处理无向图      
+
+    def dijkstra(self, start):
+
+        distances = {node: float('inf') for node in self.nodes} 
+        #initializing the shortest distance as infinite 
+
+        distances[start] = 0 #我们用distance数组记录从原点到每一个点的最短路，原点到原点则记为0
+
+        heap = [(0, start)] #用堆来记录当前所有备选桥梁路径长度（从新大陆到旧大陆的穿越路径）
+
+        while heap:
+
+            current_distance, current_node = heapq.heappop(heap) #每次将堆顶的结点移出，由于堆顶元素总是最小，此处一步实现将最短路径加入旧大陆的贪心过程。注意，由于堆内使用的是元组（tuple），默认按照第一个元素维护堆。
+
+			for neighbor, weight in self.edges[current_node].items(): 
+			#枚举和此时堆顶结点相连的所有边,若尚未在桥梁边中或到达当前邻居的最短路刷新，则将他们加入/再次更新桥梁边合集。
+                distance = current_distance + weight
+                if distance < distances[neighbor]:
+                    distances[neighbor] = distance
+                    heapq.heappush(heap, (distance, neighbor)) 
+
+        return distances
+
+```
+
+
+---
+
+![Cat](/static/images/cat.gif)
+
+这一篇Dijkstra写在正式地介绍 **堆** 之前。也是因为在看Dijkstra的时候想到了复习数据结构才有了本月初以来连续的几篇关于堆、平衡树和哈希表。当然，Dijkstra也是经典中的经典了，再重新发布一次共参阅和温习。
+
+-鹅仔
+2024/05/26 20：44
