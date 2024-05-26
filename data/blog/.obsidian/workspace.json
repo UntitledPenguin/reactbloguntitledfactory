@@ -18,21 +18,8 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "37aef0e840cc12ce",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "W001- ObjectOriented.mdx",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -98,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "W001- ObjectOriented.mdx",
+                "file": "W301-HashTable.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "W001- ObjectOriented.mdx",
+                "file": "W301-HashTable.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "W001- ObjectOriented.mdx"
+                "file": "W301-HashTable.mdx"
               }
             }
           }
@@ -158,10 +145,13 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "37aef0e840cc12ce",
+  "active": "27e03498516b4d8e",
   "lastOpenFiles": [
-    "W102-Beginning-Words.mdx",
+    "W401-DataStructureSummary.mdx",
+    "W302-Sudoku.mdx",
+    "WX0X-Template.mdx",
     "W001- ObjectOriented.mdx",
+    "W102-Beginning-Words.mdx",
     "未命名.md",
     "W301-HashTable.mdx",
     "sudokuresult 1.png",
@@ -173,11 +163,8 @@
     "HashTable_画板 1.png",
     "HashTable_OA.png",
     "HashTable_Chain_画板 1.png",
-    "WX0X-Template.mdx",
     "Manual/introducing-tailwind-nextjs-starter-blog.mdx",
     "Manual/guide-to-using-images-in-nextjs.mdx",
-    "Manual/deriving-ols-estimator.mdx",
-    "Manual/code-sample.mdx",
     "W101-Greeting.md"
   ]
 }
