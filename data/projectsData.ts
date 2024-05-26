@@ -16,7 +16,7 @@ const projectsData: Project[] = [
     title: 'A Computational Workflow for urban planning project data management',
     description: `See the exploration of using Rhino and Grasshopper in my work as a masterplanner.`,
     imgSrc: '/static/images/workflow.jpg',
-    href: '/blog/the-time-machine',
+    href: 'https://www.linkedin.com/posts/jiaqi-wang-ramis_grasshopper-rhino-urbanplanningworkflow-activity-7199515469085638656-3a_Y?utm_source=share&utm_medium=member_desktop',
   },
 ]
 
