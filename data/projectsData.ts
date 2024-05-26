@@ -7,19 +7,15 @@ interface Project {
 
 const projectsData: Project[] = [
   {
-    title: 'A Search Engine',
-    description: `What if you could look up any information in the world? Webpages, images, videos
-    and more. Google has many features to help you find exactly what you're looking
-    for.`,
-    imgSrc: '/static/images/google.png',
-    href: 'https://www.google.com',
+    title: 'Python小项目|A Sudoku Solver',
+    description: `A high-performance Sudoku solver utilizing Depth-First Search (DFS) and hash tables.Running time listed among top 1% on Leetcode. Click to take a look`,
+    imgSrc: '/static/images/Sudoku.jpg',
+    href: '/blog/W302-Sudoku',
   },
   {
-    title: 'The Time Machine',
-    description: `Imagine being able to travel back in time or to the future. Simple turn the knob
-    to the desired date and press "Go". No more worrying about lost keys or
-    forgotten headphones with this simple yet affordable solution.`,
-    imgSrc: '/static/images/time-machine.jpg',
+    title: 'A Computational Workflow for urban planning project data management',
+    description: `See the exploration of using Rhino and Grasshopper in my work as a masterplanner.`,
+    imgSrc: '/static/images/workflow.jpg',
     href: '/blog/the-time-machine',
   },
 ]
