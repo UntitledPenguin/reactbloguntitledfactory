@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "W003-Dijkstra.mdx",
+                "file": "W002-GraphSearchAlgorithms.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "W003-Dijkstra.mdx",
+                "file": "W002-GraphSearchAlgorithms.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "W003-Dijkstra.mdx",
+                "file": "W002-GraphSearchAlgorithms.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "W003-Dijkstra.mdx"
+                "file": "W002-GraphSearchAlgorithms.mdx"
               }
             }
           }
@@ -147,9 +147,9 @@
   },
   "active": "27e03498516b4d8e",
   "lastOpenFiles": [
+    "W003-Dijkstra.mdx",
     "W001-ObjectOriented.mdx",
     "W002-GraphSearchAlgorithms.mdx",
-    "W003-Dijkstra.mdx",
     "W301-HashTable.mdx",
     "W401-DataStructureSummary.mdx",
     "W302-Sudoku.mdx",
