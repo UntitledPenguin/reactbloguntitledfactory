@@ -1,0 +1,415 @@
+---
+title: 机器学习 | 线性回归以及简单的多项式回归
+date: 2024-05-12
+tags:
+  - Python
+  - MachineLearning
+  - Statistics
+  - LinearRegression
+draft: false
+summary: 机器学习入门笔记之线性回归以及简单的多项式回归
+authors:
+  - default
+images:
+  - /static/images/cat.gif
+  - /static/images/tech/0608/alpha.png
+  - /static/images/tech/0608/output_41_0.png
+  - /static/images/tech/0608/output_15_1.png
+  - /static/images/tech/0608/output_19_1.png
+  - /static/images/tech/0608/output_28_1.png
+---
+
+[ 最后更新 于 2024-06-07 ]
+
+以前总有幻觉觉得机器学习的线性回归是从最小二乘法学起的。不学不知道，一学吓一跳：世界上还有梯度下降法这么暴力的求局部最小值的算法吗。不愧是GPU的时代呀。
+
+### 梯度下降法
+
+不同于传统的通过代数方法求解拟合曲线的方法，梯度下降法也可以帮助我们通过迭代寻找局部最小值。
+思路很简单：只需要从任意值开始不停地迭代参数w/b，致使损失函数（cost function）一直减小直至不再下降。
+
+迭代的方式：$w = w - \alpha \nabla_w J(w)$
+
+其中：
+- `w` 是要优化的参数（可以是一个向量）。
+- $\alpha$ 是所谓的学习率（learning rate），控制每次更新的步长。这里值得要注意的是，alpha过大会导致梯度下降每次更新的步长太长从而无法找到局部最小值，w的值来回跳跃，cost function逐渐变大。如下图：
+
+![learning rate](/static/images/tech/0608/alpha.png)
+
+	而alpha如果过小的话，则需要更多的迭代次数才能到达局部最小值。这就需要我们不断地调试合适的alpha。
+	比较推荐的方法是从0.01开始调试每次扩大或减小3倍，以0.001，0.003，0.01，0.03，0.1...的序列不断调整alpha的值。
+	
+- $\nabla_w J(w)$ 是损失函数 `J(w)` 对参数 `w` 的梯度（偏导数），表示在 `w` 点上cost function的斜率。若我们采用一个一阶抛物线函数来理解，初始w若在最低点左侧，则斜率为负，w更新后会增加，向最小值靠近，而越靠近斜率越接近0，每次迭代所增加的绝对值就越小，直至近乎为0，w维持在最小值不动。反之，若起始的w在最低点右侧，则斜率为正，w更新后向左移动，也是越来越靠近最小值的。
+
+而对于简单的y = wx + b的线性回归来说，cost function就是我们熟悉的OLS中的距离公式：
+
+$$J(w, b) = \frac{1}{2m} \sum_{i=1}^{m} (y_i - (wx_i + b))^2$$
+
+而式中分母上的2纯纯是为了求导后便于约分添加的。为了实现梯度下降，对此式向w和b分别求偏导，可以得到下面两式 ：
+$$  \frac{\partial J}{\partial w} = \frac{1}{m} \sum_{i=1}^{m} (wx_i + b - y_i)x_i  $$
+$$\frac{\partial J}{\partial b} = \frac{1}{m} \sum_{i=1}^{m} (wx_i + b - y_i)$$
+
+更新公式为
+$$w = w - \alpha \frac{\partial J}{\partial w}$$
+$$b = b - \alpha \frac{\partial J}{\partial b}$$
+值得注意的是，由于b的更新式中含有w，很可能出现调用了更新后的w的情况，因此，推荐的写法是把梯度计算完毕后再同时更新w和b，保证不会混淆。
+
+#### 向量化和并行运算
+
+在实际的操作中，numpy为我们提供了向量化的方式来完成矩阵的各种操作，这使得我们面对大量的数据进行回归的过程中，很多情况下精简了代码。并且，由于numpy采用CPU并行运算来加速计算，原本线性的计算变成了大量数据同时计算，大大提高的计算速度，十分适合机器学习对大量数据同时进行线性变换。
+
+例如我们看下面一段代码：
+```python
+
+import numpy as np
+import time
+
+n = 40
+m = 100000
+ 
+x = np.random.rand(m,n)
+w = np.random.rand(n)
+b = np.random.rand(m)
+
+
+start_time = time.time()
+y_numpy = np.dot(x,w) + b ##使用numpy dot点乘运算
+numpy_time = time.time() - start_time
+print (y_numpy)
+
+start_time = time.time()
+y_traditional = np.zeros(m)
+for i in range(m):
+    for j in range(n):
+     y_traditional[i]+= w[j] * x[i,j] ##使用传统的数列双循环方法
+    y_traditional[i]+= b[i]
+
+traditional_time = time.time() - start_time
+print (y_traditional)
+print("NumPy dot function time:", numpy_time)
+print("Traditional array multiplication time:", traditional_time)
+```
+
+在我自己的电脑上：
+这以上两者运算时间差距还是很明显的：
+针对百万级别的数据量，numpy的运算几乎不花时间，但是传统方法花费了两秒多才跑出结果
+NumPy dot function time: 0.0s
+Traditional array multiplication time: 2.233492851257324s
+
+## 实战练习：简单的房价回归
+
+
+这周尝试用numpy和pandas结合梯度下降法来做一个简单的线性回归模型，并将此应用推广到多项式的情况。换而言之，也就是画一根直线还是画一根曲线来预测数值的区别。	
+
+### 数据的导入和筛选
+	
+首先，我们读入数据：
+
+这个数据集是我从kaggle上找的一个伦敦房价数据。
+```python
+x_origin = df['Area in sq ft'].to_numpy()
+y_origin = df['Price'].to_numpy()
+```
+
+对数据概况简单进行了解，可以看到本数据集有3480条数据。
+
+```python
+print ('The shape of x_train is:', x_origin.shape)
+print ('The shape of y_train is: ', y_origin.shape)
+m=x_origin.shape[0]
+```
+
+    The shape of x_train is: (3480,)
+    The shape of y_train is:  (3480,)
+
+然后我们将数据简单用散点图呈现一下进行观察：
+
+```python
+plt.scatter(x_origin,y_origin,marker='x',c='r')
+plt.title("Housing Price vs Area")
+plt.ylabel('Housing Price')
+plt.xlabel('Area in sqaure feet')
+```
+
+可以看到数据本身呈现喇叭状，很显然房价和面积之间的关系呈现异质性，不是一个简单的系数。毕竟影响房屋面积和价格的变量有很多，而我们这次进行单一变量的回归具有很大的局限性。
+
+![Dataset](/static/images/tech/0608/output_15_1.png)
+
+所以在本次小实验前我们对数据进行了一个小筛选，仅选择公寓“Flat/Apartment”和伦敦西南地区的房屋（Postal code前两位是SW）的房屋参与回归。这样可以一定程度上控制其他相关变量的干扰，使得用线性回归的结果更准确一些（尽可能的）。
+
+```python
+flat_df = df[df['House Type'] == 'Flat / Apartment']
+flat_df = filtered_df[filtered_df['Postal Code'].str.startswith('SW')]
+x_flat = flat_df['Area in sq ft'].to_numpy()
+y_flat = flat_df['Price'].to_numpy()
+
+```
+
+```python
+print(x_flat.shape)
+```
+
+    (660,)
+
+此时数据集中只剩下660个样本参与回归。我们再次绘制散点图来观察数据：
+
+```python
+plt.scatter(x_flat,y_flat/1000,marker='x',c='r')
+plt.title("Housing Price vs Area/Flat in London South West")
+plt.ylabel('Housing Price in k/£')
+plt.xlabel('Area in sqaure feet')
+```
+
+可以看到，筛选后的数据已经呈现出了一定的趋势。
+
+![Filtered data](/static/images/tech/0608/output_19_1.png)
+
+### 数据的标准化
+
+在进行回归之前，由于这房屋的价格面积单位不同，其数据的数量级也有很大差异。因此，我们需要对其进行缩放处理。常见的方法（我比较喜欢用的）就包含标准化——将每个x改写为：
+$$ z = \frac{x - \mu}{\sigma} $$
+其中μ是平均值，σ是标准差。这样改写后的数据变为均值是0，标准差为1。
+
+但是需要注意的是，这里的标准化（standardization，或者z-score normalisation）并不会将数据调整到0-1之间。能够完成这个操作的是max-min Normalisation：$x′=\frac{​x−μ​}{x_{max}​−x_{min}}$，后者是将数值调整至0到1之间，其受整个数据集最大最小值的影响。
+
+另外，还有一个误区是这样的标准化能够让数据集更接近正态分布，其实不然。因为这其实就是相当于对数据进行同等比例的拉伸，其之间的相对距离比例不会发生变化，因而偏态的数据无论怎么拉伸也不会变为正态的数据。而真正可以改边数据分布形态的预处理操作则可以考虑取对数等别的操作，之后或许还会讨论。
+
+那么对于这个小练习，我们直接用z-score就可以：
+
+```python
+def  z_score(data):
+ mean=np.mean(data,axis=0)
+ std=np.std(data,axis=0)
+ return (data-mean)/std
+
+x_train=z_score(x_flat)
+y_train=z_score(y_flat)
+print(x_train)
+```
+
+接下来，我们开始实践真正的梯度下降，先写一个一元的。
+
+注意：此处的w和b尚且不是数组。
+
+
+```python
+## 计算当前的 cost function：
+def compute_cost(x,y,w,b):
+    
+    m=x.shape[0]
+    total_cost=0
+    for i in range(m):
+        f=w*x[i]+b
+        cost=(f-y[i])**2
+        total_cost+=cost
+    total_cost=(1/(2*m)*(total_cost))
+    
+    return total_cost
+```
+
+```python
+## 计算每次所需下降的梯度：
+def compute_gradient(x, y, w, b): 
+    m=x.shape[0]
+    dj_dw=0
+    dj_db=0
+    
+    for i in range(m):
+        f=x[i]*w+b
+        db=f-y[i]
+        dw=(f-y[i])*x[i]
+        dj_dw+=dw
+        dj_db+=db
+    dj_dw=dj_dw/m
+    dj_db=dj_db/m
+
+    return dj_dw,dj_db
+
+```
+
+```python
+## 梯度下降的迭代主循环：
+
+def gradient_descent(x,y,w_in,b_in,cost_function,gradient_function,alpha,num_iters):
+    m=len(x)
+    j_history=[]
+    w_history=[]
+    w=w_in 
+    b=b_in
+    
+    for i in range(num_iters):
+        dj_dw,dj_db=gradient_function(x,y,w,b)
+        
+        w=w-alpha * dj_dw
+        b=b-alpha * dj_db
+        
+        if i<100000:
+            cost = cost_function(x,y,w,b)
+            j_history.append(cost)
+        
+        if i% math.ceil(num_iters/10)==0:
+            w_history.append(w)
+            print(f"Iteration {i:4}: Cost {float(j_history[-1]):8.10f}   ")
+    return w, b, j_history, w_history
+```
+
+接下来我们在主程序里调用这个梯度下降法的过程：
+起始点定位1 学习率alpha定为0.003
+
+```python
+
+##主程序调用
+
+initial_w=1
+initial_b=1
+
+iterations=5000
+alpha=0.003
+
+w,b,_,_=gradient_descent(x_train,y_train,initial_w,initial_b,compute_cost,compute_gradient,alpha,iterations)
+
+print("w,b found by gradient descent:", w, b)
+                
+```
+从输出结果中可以看到，在大约2000次的迭代之后cost function的值已经趋于稳定，不再下降了。由此我们也得到了w和b的对应值。
+
+
+    Iteration    0: Cost 0.6910753673   
+    Iteration  500: Cost 0.2008920651   
+    Iteration 1000: Cost 0.1765970695   
+    Iteration 1500: Cost 0.1753929346   
+    Iteration 2000: Cost 0.1753332540   
+    Iteration 2500: Cost 0.1753302960   
+    Iteration 3000: Cost 0.1753301494   
+    Iteration 3500: Cost 0.1753301422   
+    Iteration 4000: Cost 0.1753301418   
+    Iteration 4500: Cost 0.1753301418   
+    w,b found by gradient descent: 0.8058162383778392 2.9908288305944306e-07
+    
+此时我们就可以计算预测的y值然后呈现我们的分析结果：
+```python
+m = x_train.shape[0]
+predicted = np.zeros(m)
+
+for i in range(m):
+    predicted[i] = w * x_train[i] + b
+
+# Plot the linear fit
+plt.plot(x_train, predicted, c = "b")
+
+# Create a scatter plot of the data. 
+plt.scatter(x_train, y_train, marker='x', c='r') 
+
+# Set the title
+plt.title("Housing Price vs. Area")
+# Set the y-axis label
+plt.ylabel('Housing Price')
+# Set the x-axis label
+plt.xlabel('Area')
+```
+
+![Filtered data](/static/images/tech/0608/output_28_1.png)
+
+
+### 引入高阶变量：多项式回归
+
+在尝试了一元线性回归之后，看着上面的图心里肯定会有一个声音：直线似乎不那么令人满意，为什么不尝试用曲线呢。
+
+因而，我们可以构造更多的变量，我一口气构造了平方、立方、以及一个平方根来参与回归。同样的，这些数据在进入回归之前也要分别进行标准化处理，不然数量级的差距是惊人的：
+
+```python
+x_flat_poly = np.c_[x_flat, x_flat**2, x_flat**3, np.sqrt(x_flat)]
+print(x_poly)
+
+def  z_score(data):
+ mean=np.mean(data,axis=0)
+ std=np.std(data,axis=0)
+ return (data-mean)/std
+
+x_train=z_score(x_flat_poly)
+y_train=z_score(y_flat)
+
+```
+
+接下来我们针对多变量回归重新写作一个使用np.dot的cost function以及梯度计算的过程版本。因为此时，每次更新的系数w已经成为了一个向量。
+
+```python
+def compute_cost_multi(x, y, w, b):
+    m = x.shape[0]
+    f = np.dot(x, w) + b
+    cost = np.sum((f - y) ** 2) / (2 * m)
+    return cost
+
+def compute_gradient_multi(x, y, w, b):
+    m = x.shape[0]
+    f = np.dot(x, w) + b
+    
+    dw = np.dot((f - y), x) / m
+    db = np.sum(f - y) / m
+
+    return dw, db
+```
+
+下面，又是一样的初始化情节：
+**注意**，之前的梯度下降过程还是可以继续使用的，因为python对于变量类型无需申明，（喂什么是什么），因而即使此处w从常数变为数组，python依然可以识别它并且加减操作也依然是合法的。
+
+```python
+initial_w=[1,1,1,1]
+initial_b=1
+
+iterations=200000
+alpha=0.0003
+
+w_poly,b_poly,_,_=gradient_descent(x_train,y_train,initial_w,initial_b,compute_cost_multi,compute_gradient_multi,alpha,iterations)
+
+print("w,b found by gradient descent:", w_poly, b_poly)
+```
+
+    Iteration    0: Cost 4.8667445439   
+    Iteration 20000: Cost 0.1612326302   
+    Iteration 40000: Cost 0.1594170618   
+    Iteration 60000: Cost 0.1578086161   
+    Iteration 80000: Cost 0.1563793431   
+    Iteration 100000: Cost 0.1551092909   
+    Iteration 120000: Cost 0.1551092909   
+    Iteration 140000: Cost 0.1551092909   
+    Iteration 160000: Cost 0.1551092909   
+    Iteration 180000: Cost 0.1551092909   
+    w,b found by gradient descent: 
+    [ 0.43183551  0.72930492 -0.20345624 -0.14941295] 4.3262670349445654e-16
+
+
+上述这个结果中，我们发现cost的最小值结果从之前的0.1753下降到了0.1551。这是一个不小的幅度。因而，这似乎也说明，曲线来进行估算比直线更为准确。
+
+在此基础上，我又反复做了几组。大抵不过是采用这几个量进行排列组合：
+
+| Model ID                    | Specifications                      | Cost             | W                                                | b                          |
+| --------------------------- | ----------------------------------- | ---------------- | ------------------------------------------------ | -------------------------- |
+| 01. Cubic-Square-SquareRoot | $y=w_1x+w_2x^2+w_3x^3+w_4\sqrt x+b$ | 0.1551092909     | (0.43183551,0.72930492,-0.20345624 ,-0.14941295) | 4.3262670349445654e-16     |
+| 02. Square                  | $y=w_1x+w_2x^2+b$                   | 0.1550745809     | (0.36864666,0.481259)                            | 8.56581257254045e-17       |
+| 03. Cubic-Square            | $y=w_1x+w_2x^2+w_3x^3+b$            | **0.1548145757** | (0.30049734,0.67763631,-0.15096104)              | 9.715853794897574e-17      |
+| 04. Square-Squareroot       | $y=w_1x+w_2x^2+w_4\sqrt x+b$        | 0.1552877450     | (0.4223379 ,0.48141813, -0.05834984)             | 2.2278009840078895e-16     |
+| 05. SquareRoot              | $y=w_1x+w_4\sqrt x+b$               | 0.1649958817     | (1.45124432, -0.66711398)                        | 1.6636835439198916e-15<br> |
+
+若将这些模型用matplotlib展现在同一坐标系内，结果如图。事实上，除了外侧的几条曲线，我们很难分别哪一条的预测结果更准确。若单纯按照cost function去判断的话，紫色的三次曲线似乎是最理想的，但是这与数据集有有很大的关系。换一个数据集，或许几条曲线的准确度就又发生了变化。因而，不能完全依赖cost function的值来判断。
+
+![learning rate](/static/images/tech/0608/output_41_0.png)
+
+在后面的学习中，应该还会逐步涉及到模型的选择和评估。这个我们放到以后再聊吧。
+
+
+---
+
+![Cat](/static/images/cat.gif)
+
+
+此处 碎碎念。
+
+终于开始写machine learning的第一篇日志，忙碌的两周抽出了些时间来设置环境和写一些入门的代码。不得不说看源码比看理论书要快多了。这也是暂时不想这么快就直接调scikit-learn的原因（虽然今天讨论的这些东西scikit learn里面都是直接调包的）。这些基础东西还是自己先上手来一遍比较好，而且理解得更快呀。
+
+当然，最近还花了些时间研究Jupyter Notebook，一开始用还有些不习惯。自从发现这东西可以直接下载markdown、html以及自动打包图片我别提多开心了，这篇日志就是这么完成的。不过也发现了很多中文词汇有些不知道如何翻译，比如今天文章里提到的标准化，网上有很多也译作归一化，但总感觉哪里不对，困惑了我很久。
+
+题外话：昨天买的草莓真的好吃。今天的天气也不错。总之不可以再继续学习了，得出家门才好。
+
+-鹅仔
+2024/06/08 15：11

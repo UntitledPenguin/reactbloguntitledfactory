@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "W402-Wembley.mdx",
+                "file": "W501-LinearRegression.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "W402-Wembley.mdx",
+                "file": "W501-LinearRegression.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "W402-Wembley.mdx",
+                "file": "W501-LinearRegression.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "W402-Wembley.mdx"
+                "file": "W501-LinearRegression.mdx"
               }
             }
           }
@@ -147,20 +147,25 @@
   },
   "active": "27e03498516b4d8e",
   "lastOpenFiles": [
-    "W003-Dijkstra.mdx",
+    "output_41_0.png",
+    "output_28_1.png",
+    "output_19_1.png",
+    "output_15_1.png",
+    "alpha.png",
+    "W401-DataStructureSummary.mdx",
+    "W501-LinearRegression.mdx",
     "W402-Wembley.mdx",
+    "0607 Housing price.md",
+    "WX0X-Template.mdx",
+    "W003-Dijkstra.mdx",
     "W002-GraphSearchAlgorithms.mdx",
     "W001-ObjectOriented.mdx",
     "W301-HashTable.mdx",
-    "W401-DataStructureSummary.mdx",
     "W302-Sudoku.mdx",
-    "WX0X-Template.mdx",
     "W001- ObjectOriented.mdx",
-    "W102-Beginning-Words.mdx",
     "未命名.md",
     "sudokuresult 1.png",
     "sudokuresult.png",
-    "W301-Sudoku.mdx",
     "leetcode01.png",
     "HashTable_画板 1.png",
     "HashTable_OA.png",
