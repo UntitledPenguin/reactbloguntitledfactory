@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "W501-LinearRegression.mdx",
+                "file": "W601-LogisticRegression.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "W501-LinearRegression.mdx",
+                "file": "W601-LogisticRegression.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "W501-LinearRegression.mdx",
+                "file": "W601-LogisticRegression.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "W501-LinearRegression.mdx"
+                "file": "W601-LogisticRegression.mdx"
               }
             }
           }
@@ -133,7 +133,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -147,29 +148,29 @@
   },
   "active": "27e03498516b4d8e",
   "lastOpenFiles": [
+    "sigmoid.png",
+    "Figure_group1 2.png",
+    "W601-LogisticRegression.mdx",
+    "Figure_group2 2.png",
+    "Figure_group2 1.png",
+    "Figure_group1 1.png",
+    "Figure_group2.png",
+    "Figure_group1.png",
+    "W501-LinearRegression.mdx",
+    "WX0X-Template.mdx",
+    "W501-LinearRegression 1.mdx",
     "output_41_0.png",
     "output_28_1.png",
     "output_19_1.png",
     "output_15_1.png",
-    "alpha.png",
     "W401-DataStructureSummary.mdx",
-    "W501-LinearRegression.mdx",
     "W402-Wembley.mdx",
     "0607 Housing price.md",
-    "WX0X-Template.mdx",
     "W003-Dijkstra.mdx",
     "W002-GraphSearchAlgorithms.mdx",
     "W001-ObjectOriented.mdx",
     "W301-HashTable.mdx",
-    "W302-Sudoku.mdx",
-    "W001- ObjectOriented.mdx",
     "未命名.md",
-    "sudokuresult 1.png",
-    "sudokuresult.png",
-    "leetcode01.png",
-    "HashTable_画板 1.png",
-    "HashTable_OA.png",
-    "HashTable_Chain_画板 1.png",
     "W101-Greeting.md"
   ]
 }
