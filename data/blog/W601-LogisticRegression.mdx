@@ -135,7 +135,7 @@ $$=(1-\hat{y}^{(i)})\hat{y}^{(i)}x$$
 
 $$\frac{\partial J}{\partial \mathbf{w}} =-\frac{1}{m}\Sigma[\frac{-(1-\hat{y}^{(i)})\hat{y}^{(i)}(1-y^{(i)})x}{1-\hat{y}^{(i)}}+\frac{(1-\hat{y}^{(i)})\hat{y}^{(i)}y^{(i)}x}{\hat{y}^{(i)}}]=-\frac{1}{m}\Sigma(-\hat{y}^{(i)}x+y^{(i)}x)=\frac{1}{m}\Sigma(\hat{y}^{(i)}-y^{(i)})x$$
 
-注意，若有w为向量$（w_1,w_2,..w_j）$，则上式中x需要取与与该$w_j$对应的$x_j$
+注意，若有w多个：记为向量$（w_1,w_2,..w_j）$，则上式中x需要取与与该$w_j$对应的$x_j$
 
 于是我们就得到了，梯度递降每次更新的核心公式。
 
