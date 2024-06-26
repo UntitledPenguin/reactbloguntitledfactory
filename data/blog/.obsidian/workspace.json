@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "W701-Technopoly.mdx",
+                "file": "W801-LogsticinPython.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "W701-Technopoly.mdx",
+                "file": "W801-LogsticinPython.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "W701-Technopoly.mdx",
+                "file": "W801-LogsticinPython.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "W701-Technopoly.mdx"
+                "file": "W801-LogsticinPython.mdx"
               }
             }
           }
@@ -148,12 +148,14 @@
   },
   "active": "27e03498516b4d8e",
   "lastOpenFiles": [
-    "W402-Wembley.mdx",
+    "W601-LogisticRegression.mdx",
+    "W801-LogsticinPython.mdx",
+    "WX0X-Template.mdx",
     "W701-Technopoly.mdx",
+    "W402-Wembley.mdx",
     "W401-DataStructureSummary.mdx",
     "未命名.md",
     "W501-LinearRegression.mdx",
-    "W601-LogisticRegression.mdx",
     "sigmoid.png",
     "Figure_group1 2.png",
     "Figure_group2 2.png",
@@ -161,7 +163,6 @@
     "Figure_group1 1.png",
     "Figure_group2.png",
     "Figure_group1.png",
-    "WX0X-Template.mdx",
     "W501-LinearRegression 1.mdx",
     "output_41_0.png",
     "output_28_1.png",
@@ -170,7 +171,6 @@
     "W003-Dijkstra.mdx",
     "W002-GraphSearchAlgorithms.mdx",
     "W001-ObjectOriented.mdx",
-    "W301-HashTable.mdx",
     "W101-Greeting.md"
   ]
 }
