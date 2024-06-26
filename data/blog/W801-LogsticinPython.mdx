@@ -90,9 +90,8 @@ Y_train=Y_input
 
 可以看到此时的训练集X数字都按比例放缩了，这便于接下来进行梯度递降。
 
-```python
-X_train
 ```
+    X_train
 
     array([[-1.80026271,  0.57907221,  0.54596793],
            [ 0.62666824,  0.73692924,  0.54596793],
@@ -101,7 +100,7 @@ X_train
            [-1.10685387, -1.99925931, -0.51416397],
            [ 0.97337266,  0.68431023, -0.51416397],
            [ 0.10661161,  1.31573836,  0.54596793]])
-
+```
 
 
 ### 3. 梯度递降法实现逻辑回归
@@ -181,7 +180,8 @@ iterations = 10000
 alpha = 0.01
 
 w,b, J_history,w_history = gradient_descent(X_train,Y_train, initial_w, initial_b, compute_cost, compute_gradient, alpha, iterations, 0)
-```
+
+#返回结果：
 
     Iteration    0: Cost     0.69 w:[-0.00082978  0.00220324 -0.00499886]
     Iteration 1000: Cost     0.58 w:[ 0.24319593  0.25340642 -0.43003393]
@@ -194,7 +194,8 @@ w,b, J_history,w_history = gradient_descent(X_train,Y_train, initial_w, initial_
     Iteration 8000: Cost     0.57 w:[ 0.26466489  0.29532831 -0.52826072]
     Iteration 9000: Cost     0.57 w:[ 0.26466079  0.29533342 -0.52826447]
     Iteration 9999: Cost     0.57 w:[ 0.26465945  0.29533499 -0.52826542]
-    
+
+``` 
 
 可以看到结果停留在了cost大约在0.57的位置。
 
