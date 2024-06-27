@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "W801-LogsticinPython.mdx",
+                "file": "W802-Nonsense01.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "W801-LogsticinPython.mdx",
+                "file": "W802-Nonsense01.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "W801-LogsticinPython.mdx",
+                "file": "W802-Nonsense01.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "W801-LogsticinPython.mdx"
+                "file": "W802-Nonsense01.mdx"
               }
             }
           }
@@ -148,14 +148,19 @@
   },
   "active": "27e03498516b4d8e",
   "lastOpenFiles": [
-    "W601-LogisticRegression.mdx",
-    "W801-LogsticinPython.mdx",
     "WX0X-Template.mdx",
-    "W701-Technopoly.mdx",
+    "W801-LogsticinPython.mdx",
+    "W802-Nonsense01.mdx",
     "W402-Wembley.mdx",
     "W401-DataStructureSummary.mdx",
-    "未命名.md",
+    "W701-Technopoly.mdx",
+    "W601-LogisticRegression.mdx",
     "W501-LinearRegression.mdx",
+    "W302-Sudoku.mdx",
+    "W202-BST.mdx",
+    "W103-KnowledgeManagement.mdx",
+    "W101-Greeting.md",
+    "未命名.md",
     "sigmoid.png",
     "Figure_group1 2.png",
     "Figure_group2 2.png",
@@ -163,14 +168,9 @@
     "Figure_group1 1.png",
     "Figure_group2.png",
     "Figure_group1.png",
-    "W501-LinearRegression 1.mdx",
     "output_41_0.png",
     "output_28_1.png",
     "output_19_1.png",
-    "0607 Housing price.md",
-    "W003-Dijkstra.mdx",
-    "W002-GraphSearchAlgorithms.mdx",
-    "W001-ObjectOriented.mdx",
-    "W101-Greeting.md"
+    "0607 Housing price.md"
   ]
 }
