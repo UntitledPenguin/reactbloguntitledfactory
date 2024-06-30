@@ -15,8 +15,8 @@ images:
   - /static/images/cat.gif
   - /static/images/tech/Logistic/L1L2.png
   - /static/images/tech/Logistic/output_34_0.png
-  - /static/images/tech/Logistic/output_35_0.pmg
-  - /static/images/tech/Logistic/overfitting-illustration.png
+  - /static/images/tech/Logistic/output_35_0.png
+  - /static/images/tech/Logistic/overfitting-illustration.jpg
 ---
 
 [ 最后更新 于 2024-06-30] 
@@ -28,14 +28,15 @@ images:
 ## 过度拟合陷阱
 
 刚开始接触回归统计的时候，很容易有一个误区，就是一直死盯着R方看。事实上，R方是一个很具有迷惑性的东西，会误导你拼命往你的模型里加很多变量。甚至有时候，我们或许会因为变量太多开始罔顾逻辑地为所欲为，陷入一个过拟合（overfitting）的陷阱——做出一个只能解释训练集本身的一个模型。比较极端的一个例子就是用5个变量（or高次项）去拟合只有五个数据的训练集，方程甚至有个解（再加一个就有多个解了喂…）。
-![overfitting-illustration](/static/images/tech/Logistic/overfitting-illustration.png)
+
+![overfitting-illustration](/static/images/tech/Logistic/overfitting-illustration.jpg)
 
 所以，今天就来说说面对一大堆数据时避免过度拟合的一般思路：
 ### 减少自变量（Subset Selection）
 
 既然过拟合是自变量过多引起的，那么一个很直观的想法就是从中挑选一些。
 
-**1）首先**，我们在不过脑子的情况下，考虑**朴素的排列组合**：n个变量从中分别取1，2，3...n个，复杂度是$O(2^n)$。别说人工筛不出来，在变量超过40个的情况下，计算机筛选也需要大半天了。因此，这个想法在时间和硬件成本有限的情况下，大概率会被直接pass。
+**1）首先**，我们在不过脑子的情况下，考虑**朴素的排列组合**：n个变量从中分别取1，2，3...n个，复杂度是$O(2^n)$。别说人工筛不出来，在变量超过30个的情况下，计算机筛选也需要大半天了。因此，这个想法在时间和硬件成本有限的情况下，大概率会被直接pass。
 
 **2）** 穷举不成，直接**贪心**（一看就是老骗分侠啦）。简单来说就是从空模型开始，依次加入能让模型性能提升（或者说cost最显著下降）的变量，直到没有变量可以使得显著提升了。上述的这种思路又可以被称为正向选择法（**Forward Selection**）。当然，我们也可以反过来想，先把所有模型全放进去，然后依次删除无关紧要的变量，直到若再删一个变量模型性能就显著下降了（**Backward Selection**）。或者将二者结合，在每一步里既可以添加又可以减少。但是，既然是贪心，我们不能保证以上这些步骤就一定能找到全局最优的变量组合，因为我们不能断言模型的性能不一定是遵循这样每一步都最优的递进关系的。
 
