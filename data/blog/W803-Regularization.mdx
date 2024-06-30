@@ -54,14 +54,15 @@ images:
 
 之前对这个概念及翻译很懵，网上查处的一众资料也没有交代实行正则化的前因后果。直到最近正紧看了书才知道，哦，这个其实不就是可以看作**自动档调参**吗（如果说上面的变量删除是手动挡的话）。
 
-所谓L1正则化（Lasso）和L2正则化（Ridge）：
+所谓==L1正则化（Lasso）==和==L2正则化（Ridge）==：
 
-$Cost=Cost_{original}​+λ\Sigma_{i=1}^n​∣w_i​∣....（L1 Regularization）$
-$Cost=Cost_{original}​+λ\Sigma_{i=1}^n​w_i^2​....（L1 Regularization）$
+$$Cost=Cost_{original}​+λ\Sigma_{i=1}^n​∣w_i​∣....（L1 Regularization）$$
+
+$$Cost=Cost_{original}​+λ\Sigma_{i=1}^n​w_i^2​....（L2 Regularization）$$
 
 二者都是在原有的cost function基础上加了一个所谓的惩罚项（Penalty Term）。只不过前者是绝对值项，后者是平方项。这里的$\lambda$选取很重要，一般需要在保持变量的解释性和避免过拟合之间进行平衡（可以结合k-ford cross validation的方法选出最佳的$\lambda$）。
 
-下面我们借着之前逻辑回归时预测录取概率的三个变量，开始一边介绍L1和L2正则化的实现方法和异同。
+下面我们借着之前逻辑回归时[预测录取概率](https://upfactory.vercel.app/blog/W801-LogsticinPython)的三个变量，开始一边介绍L1和L2正则化的实现方法和异同。
 
 首先，让我们先造出多个高阶变量使得这个模型变得有了一些过度拟合的倾向（虽然不知道到底有没有）。我们在w1，w2，w3的基础上变出二次项w4，w5，w6以及三次项w7，w8和w9（numpy里是自带这些函数功能的。）：
 
