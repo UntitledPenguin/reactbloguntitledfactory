@@ -81,7 +81,6 @@ X_train_poly=z_score(X_train_poly)
 此时，我们还需要改写cost function的函数以及梯度递降的梯度值函数（此处以L1函数为例，对应的L2实现只需要把惩罚项的绝对值改成对应的平方项即可）
 
 ```python
-```python
 def compute_cost_reg_L1(X,y,w,b,lambda_=1):
     m, n = X.shape
     
