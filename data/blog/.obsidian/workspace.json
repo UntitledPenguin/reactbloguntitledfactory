@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "W802-Nonsense01.mdx",
+                "file": "W803-Regularization.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +69,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "6aa7f3c50f156f09",
@@ -85,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "W802-Nonsense01.mdx",
+                "file": "W803-Regularization.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "W802-Nonsense01.mdx",
+                "file": "W803-Regularization.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "W802-Nonsense01.mdx"
+                "file": "W803-Regularization.mdx"
               }
             }
           }
@@ -148,17 +149,20 @@
   },
   "active": "27e03498516b4d8e",
   "lastOpenFiles": [
-    "WX0X-Template.mdx",
+    "L1L2.png",
+    "output_35_0.png",
+    "output_34_0.png",
+    "overfitting-illustration.jpg",
     "W801-LogsticinPython.mdx",
+    "W803-Regularization.mdx",
     "W802-Nonsense01.mdx",
+    "WX0X-Template.mdx",
     "W402-Wembley.mdx",
     "W401-DataStructureSummary.mdx",
     "W701-Technopoly.mdx",
     "W601-LogisticRegression.mdx",
     "W501-LinearRegression.mdx",
     "W302-Sudoku.mdx",
-    "W202-BST.mdx",
-    "W103-KnowledgeManagement.mdx",
     "W101-Greeting.md",
     "未命名.md",
     "sigmoid.png",
@@ -168,9 +172,6 @@
     "Figure_group1 1.png",
     "Figure_group2.png",
     "Figure_group1.png",
-    "output_41_0.png",
-    "output_28_1.png",
-    "output_19_1.png",
     "0607 Housing price.md"
   ]
 }
