@@ -96,7 +96,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "6aa7f3c50f156f09",
@@ -173,8 +174,9 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "f1021b37c7ada237",
+  "active": "e655dcca66791a56",
   "lastOpenFiles": [
+    "W801-LogsticinPython.mdx",
     "sudokuresult.png",
     "NeuralNetworkSimple.png",
     "NeuralNetwork.png",
@@ -185,13 +187,11 @@
     "NeuralNetwork 1.png",
     "NeuralNetworkComplex.png",
     "softmax.jpg",
-    "W801-LogsticinPython.mdx",
     "W803-Regularization.mdx",
     "2024-06-28.md",
     "W601-LogisticRegression.mdx",
     "W802-Nonsense01.mdx",
     "L1L2.png",
-    "output_35_0.png",
     "WX0X-Template.mdx",
     "W402-Wembley.mdx",
     "W401-DataStructureSummary.mdx",
