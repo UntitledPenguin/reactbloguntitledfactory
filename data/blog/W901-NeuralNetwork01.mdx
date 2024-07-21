@@ -10,11 +10,11 @@ authors:
   - default
 images:
   - /static/images/cat.gif
-  - /static/images/tech/Neural Network/NeuralNetwork.png
-  - /static/images/tech/Neural Network/neurons.png
-  - /static/images/tech/Neural Network/activationfunction.png
-  - /static/images/tech/Neural Network/NeuralNetworkSimple.png
-  - /static/images/tech/Neural Network/softmax.jpg
+  - /static/images/tech/NeuralNetwork/NeuralNetwork.png
+  - /static/images/tech/NeuralNetwork/neurons.png
+  - /static/images/tech/NeuralNetwork/activationfunction.png
+  - /static/images/tech/NeuralNetwork/NeuralNetworkSimple.png
+  - /static/images/tech/NeuralNetwork/softmax.jpg
 
 ---
 
@@ -22,24 +22,25 @@ images:
 
 恭喜我时隔两周终于鼓起勇气开始写神经网络。
 上周跑代码跑伤了，深深地感受到调参这个东西对人生的消耗，真无语（不是
-不过也感受到这个东西其实核心非常的暴力（是真的非常的暴力…），。当然，也发现展开来需要了解的东西以及操作上的细节倒是很多，实施和迭代的过程需要巨大的耐心，以至于我每天晚上一边跑代码一边重温琅琊榜！（…。
+不过也感受到这个东西其实核心非常的暴力（是真的非常的暴力…）。当然，也发现展开来需要了解的东西以及操作上的细节倒是很多，实施和迭代的过程需要巨大的耐心，以至于我每天晚上一边跑代码一边重温琅琊榜！（…。
 
 ## 什么是神经网络？
 
 神经网络其实并不是最近才诞生的算法：早在上世纪80年代，它就开始在学术圈内引起关注，其灵感来自于模拟人脑“神经网络”和”神经元“之间的交互。神经网络由多个层（layers）和节点（neurons）组成，通过模拟神经元之间的连接和信息传递，来实现复杂的计算和模式识别。尽管这个概念看似与人脑的运作方式有很大关联，但实际上，这是工程师自己一种过于机械的类比（很好，和建筑师一样哎），神经网络的工作原理与人脑的实际工作方式有着本质区别（当然，我也不知道人脑怎么工作，但是肯定不是这样工作）。
 
 在神经网络初创的几年里，由于各种限制，包括数据和计算资源的匮乏，这一领域的发展曾一度停滞。然而，随着最近几十年数据量的爆炸性增长和计算能力的显著提升，神经网络迎来了新的发展契机，并以“深度学习”的名字重新焕发活力（这段是gpt的”如数家珍“）。如今，神经网络已经广泛应用于机器学习和人工智能领域，成功解决了大量模式识别、文本处理、音频和图像识别等任务。下面就来看看一个神经网络包含哪些部分：
+
 ## 神经网络的组成部分
 
-![NeuralNetwork](/static/images/tech/Neural Network/NeuralNetwork.png) 
+![NeuralNetwork](/static/images/tech/NeuralNetwork/NeuralNetwork.png) 
 
-### 隐藏层
+### 隐藏层(Hidden Layers)
 
 神经网络的输入、输出形式以及损失计算和普通的线性回归/逻辑回归可以说是很类似的。而其和其他的算法最重要的区别就在于中间加入的一些隐藏层（hidden layers）。这些隐藏层用来输入的信息进行在交互，从而整合/捕捉出新的有用信息来构造模型。
 
 看下面一个小小的示意图：
 
-![NeuralNetworkSimple](/static/images/tech/Neural Network/NeuralNetworkSimple.png) 
+![NeuralNetworkSimple](/static/images/tech/NeuralNetwork/NeuralNetworkSimple.png) 
 
 比方说，我们要建立一个模型来预测大家会不会购买一个商品。输入的X只包含X1价格和X2实用性，我们可以想象出这两个量之间的相互交护或许可以创造出新的有助于预测的量，比如说：我们构造一个物美价廉指数来测量这个东西是不是价格便宜又实用。或者，假如一个很实用的东西，洗衣机什么的，大家买的时候肯定不会朝着便宜货去，那么实用性的占比就会更高一些。再比如说，有些东西实用性可能非常低，但是特别特别便宜，那么是不是还可以有一个薅羊毛指数。最后，由这三个指数共同来决定，买还是不买。当然，下图中的系数是乱写的，你也可以进一步再加很多层——让指数之间也可以进行交互，那么我们的神经网路就可以有更多的隐藏层。
 
@@ -49,7 +50,7 @@ images:
 
 激活函数是神经网络的关键组成部分，它来决定了一个神经元的输出，也好像是一个神经元的开关。这里可以使用我们熟悉的Sigmoid 函数。当然，对于隐藏层的神经元来说更常使用的是ReLU（Rectified Linear Unit）函数。
 
-![activationfunction](/static/images/tech/Neural Network/activationfunction.png) 
+![activationfunction](/static/images/tech/NeuralNetwork/activationfunction.png) 
 
 **ReLU（Rectified Linear Unit）函数： f(x)=max⁡(0,x)，**  可以很简单地将所有负输入值置为0，正输入值不变。 这相比于sigmoid来说，它的计算简单，收敛速度也快。
 
@@ -67,7 +68,7 @@ $$ \text{Softmax}(z_i) = \frac{e^{z_i}}{\sum_{j=1}^{k} e^{z_j}} $$
 
 其中Zi是来判断其属于第i个类别的原始分数，而softmax将其转换为属于各个类别的概率。
 
-![softmax](/static/images/tech/Neural Network/softmax.jpg)
+![softmax](/static/images/tech/NeuralNetwork/softmax.jpg)
 
 
 而softmax函数的损失函数，**交叉熵损失函数（Cross-entropy loss）**，和sigmoid的损失函数也是很类似的形式，用于衡量预测概率分布与真实分布之间的差异。公式如下： 
@@ -87,7 +88,7 @@ $$ L = -\sum_{i=1}^{K} y_i \log(\hat{y}_i) $$其中 $y_i$ 是真实标签的one-
 
 至此，我们以及大概说明了神经网路的工作原理和过程。当然，在实际的神经网路工作中，所有的神经元内部的参数都是以自动挡的形式直接出现的，而不是说每个神经元的参数都有其明显的意义（比如说我们之前给的“薅羊毛”指数的例子）。尤其是当神经网络的层数过多时，人脑已经无法阅读出单个神经元在其中扮演的角色是什么了。如下图，是我在做的手写数字识别的神经网络的某次迭代中一层的60个神经元的w的值（0为黑色），只能说少有一部分些许能看出它们和某些笔画和某些数字的局部的识别之间有些联系，除此之外很多系数都是很奇特的形状。
 
-![neurons.png](/static/images/tech/Neural Network/neurons.png)
+![neurons](/static/images/tech/NeuralNetwork/neurons.png)
 
 
 但是神奇的是，它们在一起形成的神经网络竟然有很好的效果。因此我在感叹这整个算法这么暴力这么玄的同时，也感慨当数据足够多的时候，这些小小的旋钮总能找到一个合适的位置来给出一个良好的输出结果。可以说整个过程跟炼丹没什么区别（捂脸）。
