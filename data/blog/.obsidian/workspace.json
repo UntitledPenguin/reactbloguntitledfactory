@@ -13,10 +13,37 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "W803-Regularization.mdx",
+                "file": "W801-LogsticinPython.mdx",
                 "mode": "source",
                 "source": false
               }
+            }
+          },
+          {
+            "id": "e655dcca66791a56",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "W901-NeuralNetwork01.mdx",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "f6ec1abcc5e98736",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a25e6aac9f55aa15",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -69,8 +96,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "6aa7f3c50f156f09",
@@ -86,7 +112,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "W803-Regularization.mdx",
+                "file": "W901-NeuralNetwork01.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +129,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "W803-Regularization.mdx",
+                "file": "W901-NeuralNetwork01.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +152,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "W803-Regularization.mdx"
+                "file": "W901-NeuralNetwork01.mdx"
               }
             }
           }
@@ -147,31 +173,31 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "27e03498516b4d8e",
+  "active": "e655dcca66791a56",
   "lastOpenFiles": [
-    "L1L2.png",
-    "output_35_0.png",
-    "output_34_0.png",
-    "overfitting-illustration.jpg",
+    "NeuralNetwork.png",
+    "W901-NeuralNetwork01.mdx",
+    "NeuralNetwork 1.png",
+    "Pasted image 20240721221521.png",
+    "NeuralNetworkComplex.png",
+    "neurons.png",
+    "softmax.jpg",
+    "activationfunction.png",
+    "NeuralNetworkSimple.png",
     "W801-LogsticinPython.mdx",
     "W803-Regularization.mdx",
+    "2024-06-28.md",
+    "W601-LogisticRegression.mdx",
     "W802-Nonsense01.mdx",
+    "L1L2.png",
+    "output_35_0.png",
     "WX0X-Template.mdx",
     "W402-Wembley.mdx",
     "W401-DataStructureSummary.mdx",
     "W701-Technopoly.mdx",
-    "W601-LogisticRegression.mdx",
     "W501-LinearRegression.mdx",
-    "W302-Sudoku.mdx",
     "W101-Greeting.md",
     "未命名.md",
-    "sigmoid.png",
-    "Figure_group1 2.png",
-    "Figure_group2 2.png",
-    "Figure_group2 1.png",
-    "Figure_group1 1.png",
-    "Figure_group2.png",
-    "Figure_group1.png",
     "0607 Housing price.md"
   ]
 }
