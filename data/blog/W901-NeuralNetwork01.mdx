@@ -33,6 +33,7 @@ images:
 ## 神经网络的组成部分
 
 ![NeuralNetwork](/static/images/tech/NeuralNetwork/NeuralNetwork.png) 
+<img src="/static/images/tech/NeuralNetwork/NeuralNetwork.png" alt="NeuralNetwork" style="width: 70%;">
 
 ### 隐藏层(Hidden Layers)
 
@@ -41,6 +42,7 @@ images:
 看下面一个小小的示意图：
 
 ![NeuralNetworkSimple](/static/images/tech/NeuralNetwork/NeuralNetworkSimple.png) 
+<img src="/static/images/tech/NeuralNetwork/NeuralNetworkSimple.png" alt="NeuralNetworksimple" style="width: 80%;">
 
 比方说，我们要建立一个模型来预测大家会不会购买一个商品。输入的X只包含X1价格和X2实用性，我们可以想象出这两个量之间的相互交护或许可以创造出新的有助于预测的量，比如说：我们构造一个物美价廉指数来测量这个东西是不是价格便宜又实用。或者，假如一个很实用的东西，洗衣机什么的，大家买的时候肯定不会朝着便宜货去，那么实用性的占比就会更高一些。再比如说，有些东西实用性可能非常低，但是特别特别便宜，那么是不是还可以有一个薅羊毛指数。最后，由这三个指数共同来决定，买还是不买。当然，下图中的系数是乱写的，你也可以进一步再加很多层——让指数之间也可以进行交互，那么我们的神经网路就可以有更多的隐藏层。
 
@@ -69,6 +71,8 @@ $$ \text{Softmax}(z_i) = \frac{e^{z_i}}{\sum_{j=1}^{k} e^{z_j}} $$
 其中Zi是来判断其属于第i个类别的原始分数，而softmax将其转换为属于各个类别的概率。
 
 ![softmax](/static/images/tech/NeuralNetwork/softmax.jpg)
+<img src="/static/images/tech/NeuralNetwork/softmax.jpg" alt="softmax" style="width: 80%;">
+
 
 
 而softmax函数的损失函数，**交叉熵损失函数（Cross-entropy loss）**，和sigmoid的损失函数也是很类似的形式，用于衡量预测概率分布与真实分布之间的差异。公式如下： 
