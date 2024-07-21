@@ -64,11 +64,10 @@ images:
 
 $$ \text{Softmax}(z_i) = \frac{e^{z_i}}{\sum_{j=1}^{k} e^{z_j}} $$
 
-图片来源：[Dario Radečić](https://medium.com/@radecicdario?source=post_page-----a7e1bc3ad60--------------------------------)
-
 其中Zi是来判断其属于第i个类别的原始分数，而softmax将其转换为属于各个类别的概率。
 
 ![softmax](/static/images/tech/NeuralNetwork/softmax.jpg)
+图片来源：[Dario Radečić](https://medium.com/@radecicdario?source=post_page-----a7e1bc3ad60--------------------------------)
 
 而softmax函数的损失函数，**交叉熵损失函数（Cross-entropy loss）**，和sigmoid的损失函数也是很类似的形式，用于衡量预测概率分布与真实分布之间的差异。公式如下： 
 
