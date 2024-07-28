@@ -1,0 +1,133 @@
+---
+title: 机器学习 | 神经网络初探
+date: 2024-07-27
+tags:
+  - MachineLearning
+  - NeuralNetwork
+draft: false
+summary: 显卡大冒烟之神经网路调参
+authors:
+  - default
+images:
+  - /static/images/cat.gif
+  - /static/images/tech/NeuralNetwork/Model.png
+---
+
+[ 最后更新 于 2024-07-27] 
+
+非常不妙地加了一个星期的班。一周两更的计划落空，一周一更感觉是极限。。打工仔的生活真的只能这样(●'◡'●)。
+
+这周就说说最近跑代码的成果吧。
+
+## 数据来源
+
+第一次在Kaggle上做竞赛，找到的MNIST手写数字数据，也算是家喻户晓级别的问题咯。
+https://www.kaggle.com/competitions/digit-recognizer/overview
+
+这套数据已经将28×28像素的图像自行根据灰度转为了csv的格式，所以训练起来省去了很多麻烦。非常适合懒惰的我。
+## 训练过程
+
+### 训练集数据划分
+
+拿到的数据集有test和train两个csv，但是只有后者有label——作为supervised machine learning必不可少的东东。前者是作为真正的需要提交的test input，所以对于在真正的训练的过程起不到什么反馈作用，因此放在一边。
+
+于是我将已有的train.csv的20%取出，作为自己训练模型迭代优化过程中参考的“test set”，相当于给ai出的有答案的模拟卷（不过之后又分了cross-validation感觉有点没必要哈）。
+
+### Tensorflow库的准备
+
+作为一个调包侠，每次调包前需要明确自己需要调的包（这句话在说什么呀）
+
+我们这次神经网络直接用TensorFlow中Keras提供的包：
+
+```python
+from tensorflow.keras import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.losses import SparseCategoricalCrossentropy
+from tensorflow.keras.regularizers import l2
+from tensorflow.keras.regularizers import l1
+from tensorflow.keras.optimizers import Adam
+```
+
+为了方便对于超参数的选取，我自己又写了一个直接根据超参数搭建模型的子过程。这比一次一次改方便多了。
+
+其中，X是作为训练集的X，Y是作为训练集的Y，
+
+Layer_config是我们建的神经网络的hidden layer结构，以数组存储，
+
+alpha是学习率，而lambda_是为了避免过拟合所需要的正则化（regularisation）参数，这在我之前的文章中有提到过。
+
+```python
+def training(X,Y,layer_config,alpha,lambda_):
+    n,m=X.shape
+    model=Sequential()
+    for unit in layer_config:
+        model.add(Dense(units=unit, activation='relu',kernel_regularizer=l2(lambda_)))
+
+    model.add(Dense(units=10, activation='linear',kernel_regularizer=l2(lambda_)))
+    model.compile(loss=SparseCategoricalCrossentropy(from_logits=True),optimizer=Adam(learning_rate=alpha))
+    
+    k=5 #use 20% of the data as cross-validation set
+    indices = np.random.permutation(n)
+    mask = (indices % k == 0)        
+    X_cv = X[indices[mask]]
+    Y_cv = Y[indices[mask]]
+    X_train = X[~mask]
+    Y_train = Y[~mask]
+    
+    model.fit(X_train,Y_train,epochs=500)
+    train_accuracy = model.evaluate(X_train, Y_train,verbose=1)
+    cv_accuracy = model.evaluate(X_cv, Y_cv,verbose=1)
+    
+    return(train_accuracy,cv_accuracy)
+```
+
+在这个过程中，我又随机使用20%作为cross-validation set来验证模型的准确度，以及模型是否过拟合。整个过程的返回值是训练集的准确度和cross-validation set的准确度。原本的模型是打算跑5遍交叉验证的，奈何时间实在有限，在最终的版本中省去了这一步。
+
+### 调参时刻
+
+下面这个过程就很机械了。我训练了近20个模型对它们的返回值进行比选。其中第一轮主要是比选hidden layer的结构，第二轮根据结果选择了表现比较好的模型再进行正则化调整，整个结果都记录在如下的表格中：
+
+| id  | units                  | training_loss | cv_loss | Note                   |
+| --- | ---------------------- | ------------- | ------- | ---------------------- |
+| 1   | 60,28                  | 5.550000e-02  | 0.2301  | 第一轮比选                  |
+| 2   | 128,60,28              | 8.668400e-05  | 0.3601  | 第一轮比选 根据training_loss✔ |
+| 3   | 256,128,60,28          | 6.336600e-09  | 0.2141  | 第一轮比选 根据training_loss✔ |
+| 4   | 300,150,60,28          | 2.400000e-03  | 0.1769  | 第一轮比选 根据training_loss✔ |
+| 5   | 300,120,40             | 5.088900e-04  | 0.2246  | 第一轮比选                  |
+| 6   | 200,120,40             | 3.659600e-09  | 0.2422  | 第一轮比选                  |
+| 7   | 240,120,40             | 3.741000e-08  | 0.2397  | 第一轮比选                  |
+| 8   | 120,40                 | 3.079700e-08  | 0.2020  | 第一轮比选                  |
+| 9   | 256,60                 | 5.828200e-08  | 0.3298  | 第一轮比选                  |
+| 10  | 256,128                | 1.3297e-07    | 0.3168  | 第一轮比选                  |
+| 11  | 256,128,60,28_L2_0.01  | 1.410000e-01  | 0.1615  | 第二轮加入正则化比选             |
+| 12  | 128,60,28_L2_0.01      | 9.860000e-02  | 0.1121  | 第二轮加入正则化比选             |
+| 13  | 300,150,60,28_L2_0.01  | 1.352000e-01  | 0.1516  | 第二轮加入正则化比选             |
+| 14  | 128,60,28_L2_0.005     | 5.170000e-02  | 0.0784  | 第二轮加入正则化比选             |
+| 15  | 128,60,28_L2_0.05      | 3.391000e-01  | 0.3509  | 第二轮加入正则化比选             |
+| 16  | 128,60,28_L1_0.01      | 3.220000e-01  | 0.6564  | 第二轮加入正则化比选             |
+| 17  | 128,60,28_L2_0.001     | 1.380000e-02  | 0.0436  | 第二轮加入正则化比选✔            |
+| 18  | 128,60,28_L1_0.001     | 1.597000e-01  | 0.1781  | 第二轮加入正则化比选             |
+| 19  | 256,128,60,28_L2_0.001 | 0.0192        | 0.0296  | 第二轮加入正则化比选✔✔           |
+| 20  | 300,150,60,28_L2_0.001 | 0.0181        | 0.0428  | 第二轮加入正则化比选✔            |
+
+
+![model](/static/images/tech/NeuralNetwork/Model.png) 
+
+最终提交了两个模型到Kaggle系统做最后的尝试：
+-1）256-128-60-28(加L2正则化 λ=0.001) 提交后 test set 正确率 Score: 97.367%
+-2） 128-60-28(加L2正则化 λ=0.001)  提交后 test set 正确率 97.628%
+
+事实证明training set 以及cross-validation的发挥不代表test set的最终结果，感觉这个最终毫厘之间和数据本身也有不小的关系。在检索了一些资料之后觉得97-98%的发挥在这种传统摆烂型DNN（Dense Neural Network）还算是不错的发挥了，因而如果不改变算法的话再怎么调参似乎也不能够带来质的飞跃。看到有人在网上做了7层的256，正确率来到了98%，感觉有点暴力得没必要啦。
+
+当然，争取高的准确度肯定是好的。于是之后应该要为此再研究一下CNN（也就是卷积型神经网路），下个月争取再开一个章节细说…（哇，又是一个巨大的坑了）正所谓，挖坑一时爽，填坑火葬场。
+
+---
+
+![Cat](/static/images/cat.gif)
+
+调参真是一件令人头晕的工作啊。而且写的时候又觉得没什么好谈的，但是这20个模型跑下来，我的电脑和我仿佛都瘫痪了。
+还有就是希望下周别加班了。
+。。
+
+-鹅仔
+2024/07/28 凌晨

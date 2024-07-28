@@ -13,37 +13,10 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "W801-LogsticinPython.mdx",
+                "file": "W1001-NeuralNetwork02.mdx",
                 "mode": "source",
                 "source": false
               }
-            }
-          },
-          {
-            "id": "e655dcca66791a56",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "W901-NeuralNetwork01.mdx",
-                "mode": "source",
-                "source": false
-              }
-            }
-          }
-        ],
-        "currentTab": 1
-      },
-      {
-        "id": "f6ec1abcc5e98736",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "a25e6aac9f55aa15",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {}
             }
           }
         ]
@@ -96,8 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "6aa7f3c50f156f09",
@@ -113,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "W901-NeuralNetwork01.mdx",
+                "file": "W1001-NeuralNetwork02.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -130,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "W901-NeuralNetwork01.mdx",
+                "file": "W1001-NeuralNetwork02.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -153,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "W901-NeuralNetwork01.mdx"
+                "file": "W1001-NeuralNetwork02.mdx"
               }
             }
           }
@@ -174,29 +146,30 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "e655dcca66791a56",
+  "active": "27e03498516b4d8e",
   "lastOpenFiles": [
+    "Model 1.png",
+    "Model.png",
+    "output_38_0.png",
     "W801-LogsticinPython.mdx",
+    "W1001-NeuralNetwork02.mdx",
+    "W901-NeuralNetwork01.mdx",
     "sudokuresult.png",
     "NeuralNetworkSimple.png",
     "NeuralNetwork.png",
     "activationfunction.png",
     "Pasted image 20240721221521.png",
     "neurons.png",
-    "W901-NeuralNetwork01.mdx",
     "NeuralNetwork 1.png",
     "NeuralNetworkComplex.png",
-    "softmax.jpg",
     "W803-Regularization.mdx",
     "2024-06-28.md",
     "W601-LogisticRegression.mdx",
     "W802-Nonsense01.mdx",
-    "L1L2.png",
     "WX0X-Template.mdx",
     "W402-Wembley.mdx",
     "W401-DataStructureSummary.mdx",
     "W701-Technopoly.mdx",
-    "W501-LinearRegression.mdx",
     "W101-Greeting.md",
     "未命名.md",
     "0607 Housing price.md"
