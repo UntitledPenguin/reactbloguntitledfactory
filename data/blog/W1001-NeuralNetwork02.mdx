@@ -54,7 +54,7 @@ from tensorflow.keras.optimizers import Adam
 
 Layer_config是我们建的神经网络的hidden layer结构，以数组存储，
 
-alpha是学习率，而lambda_是为了避免过拟合所需要的正则化（regularisation）参数，这在我之前的文章中有提到过。
+alpha是学习率，而lambda_是为了避免过拟合所需要的正则化（regularisation）参数，这在我之前的文章[正则化以及线性回归调参侠工具包](https://upfactory.vercel.app/blog/W803-Regularization)中有提到过。
 
 ```python
 def training(X,Y,layer_config,alpha,lambda_):
