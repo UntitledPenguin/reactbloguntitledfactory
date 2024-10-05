@@ -37,7 +37,7 @@ const Header = () => {
               {link.title}
             </Link>
           ))}
-              <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
+          
         {/* External Link to Aqua Playground */}
         <Link
           href="https://aquaplayground.vercel.app/"
