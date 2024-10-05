@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "W1001-NeuralNetwork02.mdx",
+                "file": "Manual/code-sample.mdx",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "W1001-NeuralNetwork02.mdx",
+                "file": "Manual/code-sample.mdx",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "W1001-NeuralNetwork02.mdx",
+                "file": "Manual/code-sample.mdx",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "W1001-NeuralNetwork02.mdx"
+                "file": "Manual/code-sample.mdx"
               }
             }
           }
@@ -146,13 +146,13 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "27e03498516b4d8e",
+  "active": "f1021b37c7ada237",
   "lastOpenFiles": [
+    "W1001-NeuralNetwork02.mdx",
     "Model 1.png",
     "Model.png",
     "output_38_0.png",
     "W801-LogsticinPython.mdx",
-    "W1001-NeuralNetwork02.mdx",
     "W901-NeuralNetwork01.mdx",
     "sudokuresult.png",
     "NeuralNetworkSimple.png",
@@ -161,7 +161,6 @@
     "Pasted image 20240721221521.png",
     "neurons.png",
     "NeuralNetwork 1.png",
-    "NeuralNetworkComplex.png",
     "W803-Regularization.mdx",
     "2024-06-28.md",
     "W601-LogisticRegression.mdx",
