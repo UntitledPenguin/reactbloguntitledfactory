@@ -37,8 +37,6 @@ const Header = () => {
               {link.title}
             </Link>
           ))}
-          
-        {/* External Link to Aqua Playground */}
         <Link
           href="https://aquaplayground.vercel.app/"
           target="_blank"
