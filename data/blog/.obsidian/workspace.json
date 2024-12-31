@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "W1101-AnnualSummary.mdx",
+                "file": "W1102-TimeManagement.mdx",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "W1101-AnnualSummary"
+              "title": "W1102-TimeManagement"
             }
           }
         ]
@@ -164,8 +164,9 @@
   },
   "active": "27e03498516b4d8e",
   "lastOpenFiles": [
-    "W1001-NeuralNetwork02.mdx",
     "W1101-AnnualSummary.mdx",
+    "W1102-TimeManagement.mdx",
+    "W1001-NeuralNetwork02.mdx",
     "W801-LogsticinPython.mdx",
     "W001-ObjectOriented.mdx",
     "Manual/code-sample.mdx",
@@ -185,7 +186,6 @@
     "W601-LogisticRegression.mdx",
     "W802-Nonsense01.mdx",
     "WX0X-Template.mdx",
-    "W402-Wembley.mdx",
     "W101-Greeting.md",
     "未命名.md",
     "0607 Housing price.md"
