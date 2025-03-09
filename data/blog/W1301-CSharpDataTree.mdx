@@ -1,0 +1,197 @@
+---
+title: C Sharp in Grasshopper | 数据结构入门
+date: 2025-03-09
+tags:
+  - DataStructure
+  - CSharp
+  - Grasshopper
+draft: true
+summary: 此篇介绍一些C#in Grasshopper对于数组和DataTree的常见入门操作
+authors:
+  - default
+images:
+  - /static/images/cat.gif
+---
+
+[ 最后更新 于 2025-3-9 21:08 ]
+
+说明：
+这是一篇不严肃的C Sharp入门笔记，主要是为了上班的我快速找到常用命令避免抓瞎。
+
+另外：
+上个星期二在Food4Rhino上发布了自己从去年八月起自己捣鼓出来的的第一个插件：
+https://www.food4rhino.com/en/app/pelicanflow
+
+（是的， 虽然我捣鼓出了插件但是有的时候语法和函数还在抓虾。）
+（不过因为现在上班天天都要C#了！以后会是一个熟练工了吧！）
+（鹅仔成为半个码农的第一个星期！）
+
+---
+
+## 1. 数组和 List
+
+#### 1.1 初始化数组和 List
+
+```csharp
+// 初始化 List
+List<double> a = new List<double>() { 1.0, 2.0 };
+
+// 初始化数组
+double[] b = new double[] { 3.0, 4.0 };
+
+// List 支持空集
+List<double> a = new List<double>() {};
+
+// 数组需要指定长度，且长度不可更改
+double[] b = new double[2]; // 初始化时为 b = { 0.0, 0.0 }
+```
+#### 1.2 Array与 List 的区别
+
+Array数组的长度是固定的，初始化后无法更改；
+List更像一个动态的队列，长度可以变化，可以随时添加或删除元素。
+
+例如：
+1 在我们获取数组和 List 的长度时候调用的分别是Length和Count
+
+```csharp
+
+int arrayLength = array.Length;  // 获取数组的长度 (固定大小) 
+int listCount = list.Count;      // 获取 List 的元素个数 (可以动态变化)`
+```
+2 向 List 中添加元素我们可以直接
+
+```csharp
+
+AA_array.Add(x); // 向 List 添加单个元素 
+AA_array.AddRange(new List<double>{1,2,3,4}); // 向 List 添加另一个 List b
+```
+
+3 List和Array都可以直接修改地址
+```csharp
+a[1] = 2;  // 修改数组元素
+```
+
+看一个简单例子：
+
+```csharp
+List<double> a = new List<double>() { 1.0, 2.0 }; 
+double[] b = new double[2];  // 将数组 b 合并到 List a 中 a.AddRange(b);`
+a.AddRange(b);
+
+```
+此时合并后a的内容是：`1.0, 2.0, 0.0, 0.0`
+
+
+## 2.DataTree 操作合集
+
+#### 2.1 创建 DataTree
+
+```csharp
+DataTree<int> dt = new DataTree<int>();
+```
+
+#### 2.2 创建DataTree树枝的地址
+
+```csharp
+GH_Path gp2 = new GH_Path(new int[] { 300, 34, 1 });
+```
+
+#### 2.3 向 DataTree 添加元素
+
+```csharp
+
+dt.Add(y, new GH_Path(i));  // 简单地址
+
+dt.Add(x, new GH_Path(new int[]{300,34,1}));  // 复杂地址
+```
+#### 2.4 将List作为TreeBranch内容添加到DataTree
+
+```csharp
+List<double> ds = new List<double>() {}; for (int i = 0; i < x; i++) {     ds.Add(i); } dt.AddRange(ds, new GH_Path(m));  // 将 List 添加到 DataTree 中`
+```
+#### 2.5 简单双重循环建 DataTree
+
+```csharp
+for (int i = 0; i < x; i++)
+{     for (int j = 0; j < y; j++) 
+{         int[] ipath = { i, j };         
+dt.Add(k, new GH_Path(ipath));  // 根据生成的地址添加数据到 DataTree         
+k++;     } }`
+```
+#### 2.6 访问 DataTree 中的值并求和
+
+```csharp
+
+DataTree<double> dt = new DataTree<double>(); 
+double sum = 0;  
+for (int i = 0; i < x.BranchCount; i++) 
+{     
+	int n = x.Branch(i).Count;     
+for (int j = 0; j < n; j++) 
+{    
+	sum = sum + x.Branch(i)[j];     
+	} 
+}  
+a = sum;
+```
+
+#### 2.7 通过路径列表访问 DataTree 数据
+
+```csharp
+
+private void RunScript(DataTree<double> x, double y, double z, ref object a) 
+{     
+DataTree<double> tree = new DataTree<double>();     
+var pathlist = x.Paths;          
+for (int i = 0; i < x.BranchCount; i++) 
+{         
+	var path = pathlist[i];         
+	var currentBranch = x.Branch(i);         
+	foreach (double r in currentBranch) 
+	{             
+		if (r > y && r < z) {                 
+		tree.Add(r, path);  // 根据条件将数据添加到新树中，且不改变原地址             
+	}         
+	}     
+}      
+a = tree; }
+```
+
+#### 2.8 获取所有分支的地址
+
+```csharp
+private void RunScript(DataTree<double> x, ref object a) 
+{     List<string> addresses = new List<string>() {};     
+var adrs = x.Paths;          
+for (int i = 0; i < adrs.Count; i++) 
+{         
+addresses.Add(adrs[i].ToString()); 
+// 获取所有分支的路径地址     
+}          
+a = addresses; 
+}
+```
+
+## 3. 随机函数
+
+
+```csharp
+// 初始化随机种子
+Random r = new Random();  
+// 生成0到1之间的随机浮动数 
+double q = r.NextDouble();  
+// 生成1到9之间的随机整数（不包含10） 
+int n = r.Next(1, 10);
+```
+
+---
+---
+
+![Cat](/static/images/cat.gif)
+
+每天写代码的上班工作强度还是很大的！
+但是上周对自己的开发方向又有了很多新想法。
+感觉人生变得好不一样！
+
+-鹅仔
+2025/03/09 21：10

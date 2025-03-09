@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "W1102-TimeManagement.mdx",
+                "file": "W1301-CSharpDataTree.mdx",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "W1102-TimeManagement"
+              "title": "W1301-CSharpDataTree"
             }
           }
         ]
@@ -40,7 +40,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "文件列表"
@@ -164,8 +165,11 @@
   },
   "active": "27e03498516b4d8e",
   "lastOpenFiles": [
-    "W1101-AnnualSummary.mdx",
+    "C Sharp in Grasshopper-数据结构入门.md",
     "W1102-TimeManagement.mdx",
+    "W1301-CSharpDataTree.mdx",
+    "W1102-TimeManagement 1.mdx",
+    "W1101-AnnualSummary.mdx",
     "W1001-NeuralNetwork02.mdx",
     "W801-LogsticinPython.mdx",
     "W001-ObjectOriented.mdx",
@@ -183,9 +187,6 @@
     "NeuralNetwork 1.png",
     "W803-Regularization.mdx",
     "2024-06-28.md",
-    "W601-LogisticRegression.mdx",
-    "W802-Nonsense01.mdx",
-    "WX0X-Template.mdx",
     "W101-Greeting.md",
     "未命名.md",
     "0607 Housing price.md"
