@@ -1,0 +1,301 @@
+---
+title: C Sharp in Grasshopper | 点线面操作大全
+date: 2025-03-12
+tags:
+  - CSharp
+  - Grasshopper
+  - Geometry
+  - Parametric
+draft: false
+summary: 此篇介绍一些C#in Grasshopper对于点线面的常见入门操作
+authors:
+  - default
+images:
+  - /static/images/cat.gif
+---
+
+[ 最后更新 于 2025-3-12 22:41 ]
+
+鹅鹅打工速查手册
+
+《3D打工人离不开的 点线面创建和修改指南》
+ 
+---
+# 点和向量
+
+
+### 创建 Creating 
+
+```csharp
+Point3d pt1 = new Point3d(0, 0, 0);
+Vector3d Vector = new Vector3d(5, 5, 0);
+```
+
+### 属性  Attribute 
+
+```csharp
+double x = pt1.X;
+double y = pt1.Y;
+double z = pt1.Z;
+
+double x = v1.X;
+double y = v1.Y;
+double z = v1.Z;
+double length = v1.Length;
+
+```
+
+### 方法和实用操作 Methods and Operations
+
+显然，这里的操作均符合解析几何的设定：点和向量以及向量和向量之间可以做加法；
+点和点相减获得向量；向量向量相乘获得点积；
+
+```csharp
+
+Point3d pt3=pt1+moveVector;//点的移动
+Vector3d v3=v2+v1;//向量叠加
+Vector3d lineDirection=pt2-pt1;//点之间的向量
+double dot=v1*v1;//向量点积
+
+v1.Unitize();//获得单位向量
+```
+
+
+另外，垂直向量没有自带的方法，直接利用数学属性即可；求点到直线的垂点也是通过经典向量内积的定义来反推的：
+
+```csharp
+
+Vector3d v = line1.Direction;
+Vector3d d = z - line1.PointAt(0);
+double t = (d*v) / (v * v);
+Point3d projection_point = line1.PointAt(0) + t * v;
+c=projection_point;
+
+Vector3d perpVector = new Vector3d(-v1.Y, v1.X, 0);//取垂直向量
+```
+
+还有非常非常实用的 计算距离：因为 所有的线面距离问题最终基本最终都划归为找点。
+
+```csharp
+double d1 = ps1.DistanceTo(ps2);
+```
+
+# 线 Line, Polyline, Interpolated and NurbsCurve
+
+### 创建 Creating 
+
+#### 最基础的两点成线 Line
+
+```csharp
+Line line1 = new Line(pt1, pt2);
+
+```
+
+#### 多段线/折线 Polyline
+
+```csharp
+Polyline pl = new Polyline(pt_list); //注意此处如果需要polyline是closed，则第一个点和list里最后一个点需要重复
+```
+#### 内插点曲线 Interpolated Curve
+
+```csharp
+List<Point3d> pts = new List<Point3d>() { pt1, pt2, pt3 };
+Curve crv = Curve.CreateInterpolatedCurve(pts, 3);
+```
+
+#### 非均匀有理B样条曲线 NurbsCurve
+
+（老天，我第一次知道这个东西中文名
+
+注意 不同于其他曲线，这里多了一个Degree参数，用来设置阶数。一般默认就3吧
+
+```csharp
+Curve crv = NurbsCurve.CreateControlPointCurve(x, 3);
+```
+
+注意 曲线折线之间可以相互转化，方便后续各种函数的调用（因为貌似很多函数都需要NurbsCurve）
+
+```csharp
+Curve crv = line1.ToNurbsCurve();
+NurbsCurve nc = crv as NurbsCurve;
+```
+
+### 方法 Methods 
+
+#### 曲线切分 Divide a Curve and Get Points 
+
+```csharp
+double[] parameters = x.ToNurbsCurve().DivideByCount(5, true);
+Point3d[] dividePts = parameters.Select(t => x.PointAt(t)).ToArray();
+```
+
+#### 曲线长度 Get Curve Length
+
+```csharp
+double length = crv.GetLength(); //注意 这个函数对line无效
+```
+
+#### 获取控制点 Extract Control Points from a Curve
+
+注意这里的控制点 不只是点 点的location才是点本身（好绕…
+```csharp
+List<Point3d> controlPts = new List<Point3d>();
+foreach (ControlPoint pt in crva.Points)
+{
+    controlPts.Add(pt.Location);
+}
+```
+
+## Example: Creating a Grid with Polylines
+
+```csharp
+int u = 6; // Number of rows
+int v = 10; // Number of columns
+
+List<Polyline> pylList = new List<Polyline>();
+
+// Generate row polylines
+for (int i = 0; i < u; i++)
+{
+    List<Point3d> ptList = new List<Point3d>();
+    for (int j = 0; j < v; j++)
+    {
+        int id = j * u + i;
+        ptList.Add(x[id]);
+    }
+    pylList.Add(new Polyline(ptList));
+}
+
+// Generate column polylines
+for (int i = 0; i < v; i++)
+{
+    List<Point3d> ptList = new List<Point3d>();
+    for (int j = 0; j < u; j++)
+    {
+        int idx = j + i * u;
+        ptList.Add(x[idx]);
+    }
+    pylList.Add(new Polyline(ptList));
+}
+
+a = pylList;
+```
+
+# 面 Surface
+
+## 创建  Creating 
+
+#### 通过角点来创建：Creating a Surface from Corner Points
+
+
+```csharp
+NurbsSurface srf = NurbsSurface.CreateFromCorners(pt1, pt2, pt3);// 三点的平面
+NurbsSurface srf = NurbsSurface.CreateFromCorners(pt1, pt2, pt3, pt4);// 四点的曲面
+```
+
+####  通过多个点创建曲面：Creating a NurbsSurface from Multiple Points
+
+```csharp
+NurbsSurface nrb = NurbsSurface.CreateFromPoints(pt1, pt2, pt3, pt4, pt5);
+```
+
+#### 通过封闭曲线创建平面 Creating a Surface from a Closed Curve
+
+```csharp
+Brep[] b = Brep.CreatePlanarBreps(x, 0.001);
+surface=b[0];
+```
+
+#### 实例：创建简单长方形平面:
+
+```csharp
+Polyline rec = new Polyline(new List<Point3d> { pt1, pt2, pt3, pt4, pt1 });
+Curve recCurve = rec.ToNurbsCurve();
+
+// Create a planar Brep from the curve
+Brep[] breps = Brep.CreatePlanarBreps(recCurve, 0.001);
+if (breps != null && breps.Length > 0)
+{
+    Brep br = breps[0];
+    Surface srf = br.Surfaces[0];
+}
+```
+
+#### （已经翻译不好了 以下几个放弃翻译）
+
+#### Creating a Surface by Extruding a Curve
+
+```csharp
+// Define a curve x and an extrusion direction y
+Surface srf1 = Surface.CreateExtrusion(x, y);
+```
+
+#### Creating a Surface from Multiple Curves 
+
+注意如果多个线相互包含 会处理面上有洞洞的情况！
+
+```csharp
+List<Curve> crvs = new List<Curve> { x, y };
+Brep[] b = Brep.CreatePlanarBreps(crvs, 0.001);
+```
+
+#### Creating a Surface from Loft
+
+```csharp
+Brep[] b = Brep.CreateFromLoft(x, Point3d.Unset, Point3d.Unset, LoftType.Normal, false);
+```
+
+#### Creating a Surface from Sweep
+
+```csharp
+Brep[] sweptBreps = Brep.CreateFromSweep(x, y, true, 0.01);
+```
+
+### 方法 Methods  
+
+#### 获得控制点 Getting Control Points of a Surface
+
+```csharp
+NurbsSurface srf = x.ToNurbsSurface();
+var cpts = srf.Points;
+List<Point3d> pts = new List<Point3d>();
+
+foreach (ControlPoint cpt in cpts)
+{
+    pts.Add(cpt.Location);
+}
+a = pts;
+```
+
+#### 用经纬重新切分曲面 Subdividing a Surface and Getting Points at (u, v) Coordinates
+
+这个地方细说一下，uv是把面分为从0到1，但是每个曲面自带的经纬编号不一定是从零到1，所以需要引入一个interval把经纬两轴确定一下长度（此处是一个相对长度，可以看作是有几个经度几个纬度）然后重新参数化。之后我们再根据从0到1的相对位置找点。
+
+```csharp
+// Get domain intervals in U and V directions
+Interval i1 = x.Domain(0);
+Interval i2 = x.Domain(1);
+
+// Map (u, v) between (0,1) to the actual surface domain
+double uu = i1.ParameterAt(u);
+double vv = i2.ParameterAt(v);
+
+// Get the point on the surface
+Point3d pt = x.PointAt(uu, vv);
+```
+
+#### 计算曲线面积 Surface Area Calculation
+
+```csharp
+double ar = AreaMassProperties.Compute(srf).Area;//对封闭曲线据说也可行
+```
+
+---
+
+![Cat](/static/images/cat.gif)
+
+非常高产又有趣的星期三。我居然还能22：40写这个小笔记。老天。
+啊啊啊啊拥有一个ENTJ老板真的是让我又爱又恨。INTP弱小ing。
+
+-鹅仔
+2025/03/12 22：39
