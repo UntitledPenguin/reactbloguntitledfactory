@@ -1,5 +1,5 @@
 ---
-title: C Sharp in Grasshopper | 点线面操作大全
+title: C Sharp in Grasshopper | 点线面体操作大全
 date: 2025-03-12
 tags:
   - CSharp
@@ -14,11 +14,11 @@ images:
   - /static/images/cat.gif
 ---
 
-[ 最后更新 于 2025-3-12 22:41 ]
+[ 最后更新 于 2025-4-7 22:41 ]
 
 鹅鹅打工速查手册
 
-《3D打工人离不开的 点线面创建和修改指南》
+《3D打工人离不开的 点线面体的初始化 属性 和 方法合集》
  
 ---
 # 点和向量
@@ -120,7 +120,15 @@ Curve crv = line1.ToNurbsCurve();
 NurbsCurve nc = crv as NurbsCurve;
 ```
 
-### 方法 Methods 
+### 方法和属性 Methods and Attribute
+
+#### 曲线端点
+
+```csharp
+Interval domain = curve.Domain;
+double t_start = domain.T0;  // Start of the curve domain
+double t_end = domain.T1;    //End of the curve domain
+```
 
 #### 曲线切分 Divide a Curve and Get Points 
 
@@ -134,7 +142,6 @@ Point3d[] dividePts = parameters.Select(t => x.PointAt(t)).ToArray();
 ```csharp
 double length = crv.GetLength(); //注意 这个函数对line无效
 ```
-
 #### 获取控制点 Extract Control Points from a Curve
 
 注意这里的控制点 不只是点 点的location才是点本身（好绕…
@@ -205,6 +212,20 @@ NurbsSurface nrb = NurbsSurface.CreateFromPoints(pt1, pt2, pt3, pt4, pt5);
 Brep[] b = Brep.CreatePlanarBreps(x, 0.001);
 surface=b[0];
 ```
+
+#### 创建曲线的骨架平面 Creating Curve frame Plane
+
+```csharp
+Interval dd=crv.Domain;
+List<Plane> planes = new List<Plane>();
+for (int i=0;i<n;i++)
+{
+Plane currentPlane;
+crv.PerpendicularFrameAt(((domain.T1-domain.T0)/n*i), out currentPlane);
+planes.Add(currentPlane);
+}
+```
+
 
 #### 实例：创建简单长方形平面:
 
@@ -284,18 +305,56 @@ double vv = i2.ParameterAt(v);
 Point3d pt = x.PointAt(uu, vv);
 ```
 
+
 #### 计算曲线面积 Surface Area Calculation
 
 ```csharp
 double ar = AreaMassProperties.Compute(srf).Area;//对封闭曲线据说也可行
 ```
 
+# 体 Brep（Boundary representation）
+
+## 创建
+
+### BOX
+
+```csharp
+
+Interval x = new Interval(-2, 2);
+Interval y = new Interval(-10, 10);
+Interval z = new Interval(-5, 5);
+
+// Step 2: Create box using intervals
+Box box = new Box(Plane.WorldXY, x, y, z);
+
+// Step 3: Convert box to brep
+Brep brep = box.ToBrep();
+
+```
+
+### Join brep
+
+```csharp
+
+    Brep[] closedBrep = Brep.JoinBreps(allBreps, RhinoDoc.ActiveDoc.ModelAbsoluteTolerance);
+```
+
 ---
 
 ![Cat](/static/images/cat.gif)
+
+---
 
 非常高产又有趣的星期三。我居然还能22：40写这个小笔记。老天。
 啊啊啊啊拥有一个ENTJ老板真的是让我又爱又恨。INTP弱小ing。
 
 -鹅仔
 2025/03/12 22：39
+
+---
+
+2025/04/07 21：09
+更新了 体量的相关操作以及其他关于curve的补充
+还有一些常用的属性更新
+
+-
