@@ -1,0 +1,200 @@
+---
+title: Convolutional Neural Network  | 卷…积神经网络
+date: 2025-04-14
+tags:
+  - CSharp
+  - Grasshopper
+  - Geometry
+  - Parametric
+draft: false
+summary: 好卷呀 是谁星期一在更新博客
+authors:
+  - default
+images:
+  - /static/images/cat.gif
+  - /static/images/tech/NeuralNetwork/padding_strides.gif
+  - /static/images/tech/NeuralNetwork/common.gif
+  - /static/images/tech/NeuralNetwork/same_padding.gif
+  - /static/images/tech/NeuralNetwork/AlexNet-1.png
+  - /static/images/tech/NeuralNetwork/cat_CNN.png
+
+---
+
+[ 最后更新 于 2025-4-14 22:34 ]
+
+|
+---
+无助的拖延患者终于更新了CNN…
+
+---
+
+## 1. 为什么使用 CNN？
+
+传统的全连接神经网络（Fully Connected Network）每个神经元都与前一层所有输入相连，在处理图像时会导致参数数量极大。例如，一张 `224 x 224 x 3` 的彩色图片就有超过 150,000 个像素，直接输入到全连接层会导致模型非常庞大且难以训练。
+
+然而，地理学第一定律曾说：任何事物都是相互关联的，但是相邻的事物关联性更大。对于图像识别来说，这个道理似乎也是适用的。相邻的像素关联性当然更高。
+
+于是，CNN 通过**局部感受（local receptive fields）** 和**权重共享**（weight sharing）来处理图像，通过重点学习邻近像素之间的关系，更符合图像本质。
+
+## 2. CNN 的基本组成与超参数（Hyperparameters）
+
+现在介绍CNN 主要常见的组件：
+
+### Convolutional Layer
+
+- 使用「filter（卷积核）」在输入图像上滑动，提取局部特征（如边缘、角落、纹理）。
+- 每个 filter 会生成一张特征图（feature map）。
+
+随着卷积的层数叠加，识别的内容从边角逐渐变成图案，或者说空间的组织特征，因而被识别成不同的物体。比如，小猫：
+
+![CatNN](/static/images/tech/NeuralNetwork/cat_CNN.png)
+
+#### 常见超参数：
+- `filters`：filter 的数量（即输出通道数）
+	- （注意，虽然很多地方都有说filter提取边角什么的，但是每个filter到底过滤什么是由学习数据训练得到的！）
+- `kernel size (f)`：filter 的尺寸（如 3x3）
+- `stride (s)`：滑动的步长
+- `padding`：是否补零来保持尺寸（'same' 或 'valid'）
+
+no padding:
+
+![no_padding_no_strides](/static/images/tech/NeuralNetwork/common.gif) 
+
+same padding:
+![same_padding](/static/images/tech/NeuralNetwork/same_padding.gif) 
+
+stride=2:
+
+![same_padding](/static/images/tech/NeuralNetwork/padding_strides.gif)
+
+
+#### 如何计算输出尺寸？
+
+如果输入大小是 `n`，kernel size 是 `f`，padding 是 `p`，stride 是 `s`，则输出大小为：
+
+${output  size} = \left\lfloor \frac{n + 2p - f}{s} \right\rfloor + 1$
+
+
+####  **Activation Function**
+
+最常见的是 `ReLU`：
+
+${ReLU}(x) = \max(0, x)$
+
+- 引入非线性特征，帮助模型学习更复杂的模式。
+- 计算效率高，训练稳定。
+
+###  Pooling Layer
+
+对特征图进行“池化（？）”，减小尺寸和参数数量。
+
+常见类型：
+- `Max Pooling`：取窗口中的最大值
+- `Average Pooling`：取平均值
+
+作用：
+- 降低计算量
+- 增强平移不变性（translation invariance）
+- 降低过拟合风险
+
+（注意，Pooling layer没有参数需要调！）
+
+###  **Fully Connected Layer（全连接层）**
+
+- 将前面提取的特征「Flatten」后输入到 dense 层做分类。
+
+###  **Dropout 与 Batch Normalization 
+
+####  Dropout
+
+- 在训练时随机“丢弃”一部分神经元。
+- 防止模型过拟合。
+```python
+Dropout(0.5)  # 随机丢弃 50% 的神经元
+```
+#### Batch Normalization
+
+- 对每一层输入进行标准化（均值为 0，方差为 1）。
+    
+- 提高训练速度与稳定性。
+    
+```python
+
+`BatchNormalization(axis=-1)`
+```
+
+> 通常 BatchNorm 放在激活函数前后，Dropout 一般在最后几层使用。
+
+
+## 3 如何确定CNN 的参数计算量
+
+卷积神经网络中，**每一层都有一些可学习的参数**，主要来自于卷积层和全连接层。
+我们以一层卷积层（Convolutional Layer）为例，来分析参数数量：
+
+- 输入张量尺寸为：`n × n × c_in`  
+  （例如：32×32 的图像，有 3 个颜色通道）
+- filter（卷积核）尺寸为：f × f`
+- filter 的数量为：`c_out`  
+  （输出通道数，等同于输出特征图数量）
+- 每个 filter 都有一个 bias
+- 那么每个 filter 的参数数量则为 `(f × f × c_in+1)` ：对每个input图层的扫描结果 加上bias
+- 总参数量则为 `(f × f × c_in+1) ×c_out` 也就是乘以该层的全部filter数量
+
+
+例子：假设某一层输入大小为 `32 × 32 × 3`，使用 `64` 个大小为 `3 × 3` 的 filter：
+
+- 每个 filter 的参数数：
+  3 × 3 × 3 + 1 = 28
+- 总参数数：
+  28 × 64 = 1,792
+
+相比于全连接层动辄上万的参数，这样的设计显著**降低了参数数量**，同时又能高效提取空间特征。
+
+
+## 4 模型实例 AlexNet 
+
+![[AlexNet-1]](/static/images/tech/NeuralNetwork/AlexNet-1.png)
+
+以2012年（竟然是这么远古的时间）的AlexNet为例子来说明整个CNN的架构。
+##### Architecture Summary:
+
+| Layer   | Details                                                                                                                                              |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Input   | 227×227×3 image 首先 输入的是227×227像素RGB三通道的图片                                                                                                            |
+| Conv1   | 96 filters of size 11×11, stride 4 在第一个Convolutional layer，我们用11×11的窗口进行扫描，因为stride是4，得到output的size为：（227-11）/4+1=55；但注意此时整个output的shape深度/厚度已经来到96； |
+| MaxPool | 3×3, stride 2 ；max pooling后，宽度变小，深度96不变。                                                                                                             |
+| Conv2   | 256 filters of 5×5 接着又用256个filter开始逐一扫描                                                                                                              |
+| MaxPool | 3×3 再次max pooling 此时变为13×13                                                                                                                          |
+| Conv3   | 384 filters of 3×3                                                                                                                                   |
+| Conv4   | 384 filters of 3×3                                                                                                                                   |
+| Conv5   | 256 filters of 3×3 继续经过三个convolutional layer                                                                                                         |
+| MaxPool | 3×3                                                                                                                                                  |
+| FC6     | 4096 units 最后两个fully connected layer                                                                                                                 |
+| FC7     | 4096 units                                                                                                                                           |
+| FC8     | 1000 units (ImageNet classes)                                                                                                                        |
+其实我并不是很确定为什么这样做这个架构，咨询了一下Chatgpt，回答有一些值得借鉴的地方：
+
+- **一开始使用11×11的大卷积核？** 当时的经验是，使用较大的卷积核有助于捕捉更多的空间信息。步幅（stride）为4也是为了进一步减少输出尺寸，并且控制计算量。这个配置帮助AlexNet在保持较多特征的同时，不会因为图像尺寸过大而导致计算负担过重。通常，较大的卷积核能捕捉较为“宏观”的图像特征，而较小的卷积核则能捕捉较细致的局部特征。这里的选择可以看作是一种对图像不同层次信息的平衡。
+- **几个卷积层后进行maxpool** : Max pooling层通过“压缩”空间尺寸，减少了计算量，并且能够有效地保留最显著的特征。在卷积神经网络中，池化操作有助于引入一些平移不变性（translation invariance），即如果物体的位置稍微改变，网络仍然能够识别出来。
+- **AlexNet的卷积层深度逐渐加深（96 -> 256 -> 384 -> 384 -> 256）**，好处在于逐渐学习从局部到全局的特征：最开始的卷积层能够捕捉一些基础的局部特征，如边缘和纹理，而后面的层则能够捕捉更高级的、更加抽象的特征（如物体的形状、部分）。这种多层的设计遵循了深度学习中的层级表示学习原则——每一层提取的特征都可以在下一层的卷积中进行进一步的组合与抽象。
+ - **全连接层 FC6和FC7**：在卷积层后加上多个全连接层是为了进行最终的分类决策。这两个全连接层拥有大量的神经元，能够处理非常复杂的特征组合。特别是4096个神经元，能够提供更大的表示能力。全连接层的数量和规模通常是基于实际的任务需求和模型的计算能力来设定的。AlexNet通过增加全连接层的规模，让模型能够学习更复杂的特征，从而提高分类准确性。
+
+总之就是好！（…
+
+
+---
+
+
+![Cat](/static/images/cat.gif)
+
+---
+
+
+写在后面
+
+自己对于CNN感觉有点一知半解，所以直到今天才鼓起勇气发稿，还有很多不太懂的地方而且一直觉得这些架构很玄学啦。后面还可能记录一下关于ResNet和物体识别的一些东西。当然，要过两天！
+
+
+-鹅仔
+2025/04/14 22：35
+
