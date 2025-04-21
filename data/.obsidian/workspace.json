@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/W1501-ConvolutionalNN.mdx",
+                "file": "blog/W1502-ConvolutionalNN-B.mdx",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "W1501-ConvolutionalNN"
+              "title": "W1502-ConvolutionalNN-B"
             }
           }
         ]
@@ -167,10 +167,21 @@
   },
   "active": "89a4d0814feda5fa",
   "lastOpenFiles": [
+    "padding_strides_transposed.gif",
+    "no_padding_no_strides_transposed.gif",
+    "same_padding_no_strides_transposed.gif",
+    "Unet_1.png",
+    "encoder.png",
+    "Yolo architecture.png",
+    "non-max-suppression.png",
+    "YOLO_image_IOU.png",
+    "box_label.png",
+    "anchorbox.png",
+    "YOLO_image_02.png",
+    "blog/W1501-ConvolutionalNN.mdx",
     "blog/WX0X-Template.mdx",
     "blog/W1302-CSharpGeometryABC.mdx",
     "blog/W1401-Burglary.mdx",
-    "blog/W1501-ConvolutionalNN.mdx",
     "blog/W1301-CSharpDataTree.mdx",
     "blog/W1201-Resignation.mdx",
     "blog/W202-BST.mdx"
