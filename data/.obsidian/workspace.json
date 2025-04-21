@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/W1502-ConvolutionalNN-B.mdx",
+                "file": "blog/W1503-HerStory.mdx",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "W1502-ConvolutionalNN-B"
+              "title": "W1503-HerStory"
             }
           }
         ]
@@ -167,6 +167,8 @@
   },
   "active": "89a4d0814feda5fa",
   "lastOpenFiles": [
+    "blog/W1502-ConvolutionalNN-B.mdx",
+    "blog/W1503-HerStory.mdx",
     "padding_strides_transposed.gif",
     "no_padding_no_strides_transposed.gif",
     "same_padding_no_strides_transposed.gif",
@@ -177,7 +179,6 @@
     "YOLO_image_IOU.png",
     "box_label.png",
     "anchorbox.png",
-    "YOLO_image_02.png",
     "blog/W1501-ConvolutionalNN.mdx",
     "blog/WX0X-Template.mdx",
     "blog/W1302-CSharpGeometryABC.mdx",
