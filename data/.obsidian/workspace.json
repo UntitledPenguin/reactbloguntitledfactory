@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "fd0e8b9b408e9319",
+        "id": "80cc906e968e7c46",
         "type": "tabs",
         "children": [
           {
-            "id": "89a4d0814feda5fa",
+            "id": "179c4ad4526f37f9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/W1901-WelcomeToHefei.mdx",
+                "file": "blog/W2001-My2025.mdx",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "W1901-WelcomeToHefei"
+              "title": "W2001-My2025"
             }
           }
         ]
@@ -166,19 +166,21 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "89a4d0814feda5fa",
+  "active": "179c4ad4526f37f9",
   "lastOpenFiles": [
-    "blog/W1804-OrangeNFreedom.mdx",
-    "blog/W1802-SHOWER2.mdx",
-    "blog/W1901-WelcomeToHefei.mdx",
+    "blog/Manual/github-markdown-guide.mdx",
+    "blog/Manual/new-features-in-v1.mdx",
+    "blog/Manual/release-of-tailwind-nextjs-starter-blog-v2.0.mdx",
+    "blog/Manual/deriving-ols-estimator.mdx",
+    "blog/Manual/code-sample.mdx",
+    "blog/New Project.mdx",
+    "blog/output_38_0.png",
+    "blog/sudokuresult.png",
+    "blog/W2001-My2025.mdx",
+    "blog/W1201-Resignation.mdx",
     "blog/W1803-OnPractice.mdx",
-    "blog/WX0X-Template.mdx",
-    "blog/W1801-SHOWER.mdx",
-    "blog/W1101-AnnualSummary.mdx",
-    "blog/W1701-WIND.mdx",
-    "blog/W1503-HerStory.mdx",
+    "blog/W1802-SHOWER2.mdx",
     "blog/W1601-MyBDay.mdx",
-    "blog/W1502-ConvolutionalNN-B.mdx",
     "padding_strides_transposed.gif",
     "no_padding_no_strides_transposed.gif",
     "same_padding_no_strides_transposed.gif",
@@ -186,8 +188,6 @@
     "encoder.png",
     "Yolo architecture.png",
     "non-max-suppression.png",
-    "YOLO_image_IOU.png",
-    "box_label.png",
-    "anchorbox.png"
+    "YOLO_image_IOU.png"
   ]
 }
