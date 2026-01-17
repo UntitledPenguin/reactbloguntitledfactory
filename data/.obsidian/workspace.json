@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/W2002-Uchuujin.mdx",
+                "file": "blog/W2003-WorldMAP.mdx",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "W2002-Uchuujin"
+              "title": "W2003-WorldMAP"
             }
           }
         ]
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "a3171e07e35c8e9b",
@@ -168,8 +169,20 @@
   },
   "active": "be26e5b3e32bf721",
   "lastOpenFiles": [
-    "blog/W2001-My2025.mdx",
+    "UTM.png",
+    "LondonMap.png",
+    "NK.png",
+    "WGS_84_reference.png",
     "blog/W2002-Uchuujin.mdx",
+    "blog/W2003-WorldMAP.mdx",
+    "Utm-latlon_grid_en.svg 1.png",
+    "secant conic 1.gif",
+    "sc_projections_lcc 1.png",
+    "Robinson_projection_SW 1.jpg",
+    "reversed cylinder 1.gif",
+    "Oranges 1.png",
+    "Mollweide_projection_SW 1.jpg",
+    "blog/W2001-My2025.mdx",
     "blog/W1502-ConvolutionalNN-B.mdx",
     "blog/W1501-ConvolutionalNN.mdx",
     "AlexNet-1.md",
@@ -177,18 +190,6 @@
     "blog/W601-LogisticRegression.mdx",
     "blog/W1001-NeuralNetwork02.mdx",
     "blog/W901-NeuralNetwork01.mdx",
-    "blog/W803-Regularization.mdx",
-    "blog/W1102-TimeManagement.mdx",
-    "blog/W701-Technopoly.mdx",
-    "blog/output_38_0.png",
-    "blog/sudokuresult.png",
-    "padding_strides_transposed.gif",
-    "no_padding_no_strides_transposed.gif",
-    "same_padding_no_strides_transposed.gif",
-    "Unet_1.png",
-    "encoder.png",
-    "Yolo architecture.png",
-    "non-max-suppression.png",
-    "YOLO_image_IOU.png"
+    "blog/W803-Regularization.mdx"
   ]
 }
