@@ -1,6 +1,6 @@
 ---
 title: 地球公民需要了解的大地坐标系——谈CRS
-date: 2026-01-04
+date: 2026-01-17
 tags:
   - Geography
   - Science
@@ -80,7 +80,7 @@ _——鹅仔_
 | 扁率 (f)  | 1/298.257223563 | 地球扁平化程度（赤道半径与极半径差） |
 | 极半径 (b) | 6356752.3142 m  | 根据 (b = a(1-f)) 计算 |
 ![WGS_84_reference](/static/images/science/WGS_84_reference.png)
-< WGS84 所定义的地球参数 >
+  - WGS84 所定义的地球参数 
 
 直到今天，WGS84依旧是我们所广泛使用的国际通用的的地理坐标系统。（尽管自 1984 年建立以来，它已经经过多次更新和微调，以适应卫星测量精度提升和地球物理变化。）我们的谷歌地图，以及很多地图网站所使用的经纬数据也都是基于这个框架。
 
@@ -148,7 +148,7 @@ _——鹅仔_
 
 ![Lambert](/static/images/science/Lambert_conformal_conic_projection_SW.jpg)
 
-< 世界地图 Lambert Conformal Projection>
+- 世界地图 Lambert Conformal Projection
 #### 折中一下吧——Robinson和Mollweide 
 
 看来，使用其他规则曲面投影后都让地球变得”虽然准确“，"但是陌生"了…，那么要不就寻找一个别的平面形状呢？
@@ -179,7 +179,7 @@ _——鹅仔_
 于是，就有了下图中将地球像纸糊的灯笼一样拼起来的世界地图：
 ![Goode_homolosine](/static/images/science/Goode_homolosine_projection_SW.jpg)
 
-<世界地图 Goode Homolosine projection >
+- 世界地图 Goode Homolosine projection 
 
 不难发现高纬度和低纬度地区之间有个明确的转折点，这正是因为它是将两个不同的等面积投影拼接而成（其中一个正是我们上面说的Mollweide哦）。在尽量保全大陆形状不失真的前提下，又将原有的形状进行了不一样的”展开“。这尽量地留存了形状（虽然还是有点变形）并且也保留了面积不失真。
 
