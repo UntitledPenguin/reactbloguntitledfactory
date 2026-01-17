@@ -14,7 +14,7 @@ images:
   - /static/images/science/6709A-map-web.jpg
   - /static/images/science/5117311_wmark.jpeg
   - /static/images/science/WGS_84_reference.png
-  - /static/images/science/Mercator_projection_Square.jpg
+  - /static/images/science/Mercator_projection.jpg
   - /static/images/science/Miller_projection_SW.jpg
   - /static/images/science/Antarctica.png
   - /static/images/science/NK.png
@@ -92,10 +92,10 @@ _——鹅仔_
 
 千奇百怪的脑洞当然就出现了：
 
-#### 和非洲一样大的格陵兰？—— 基于圆柱体的投影
+### 和非洲一样大的格陵兰？—— 基于圆柱体的投影
 
 首先，最简单的想法当然是：就经纬度画成横平竖直的呗，既然他们在空间上本身就是垂直的。这正是我们之前上一节内容中看到的历史地图的绘制方法——墨卡托投影法 (Mercator projection)。其要义非常简单直观，就是直接把经纬改换成垂直的x和y轴——相当于把球体上的信息投影到了一个圆柱体上。然而，这样的投影对于高纬度地区高度失真，最经典的莫过于格林兰岛和非洲的面积看上去已经差不多了。要知道，格林兰岛只有区区两百多万平方公里，而非洲大陆的面积大约为3020万平方公里，相当于三倍于中国的面积。因而，我们大部分习惯了这张地图的人，世界面积观可以说是相当完全虚构的（？。
-![Mercator_projection_Square](/static/images/science/Mercator_projection_Square.jpg)
+![Mercator_projection_Square](/static/images/science/Mercator_projection.jpg)
 - 世界地图 World Map - Mercator Projection 
 
 当然，也有后来者试图解决这个问题，尝试把高纬度地区的y轴缩放一下。这就是miller cylindrical投影。治标不治本，我们企鹅统治的南极还是横跨整个地球的超级第一大洲呢！
@@ -103,7 +103,7 @@ _——鹅仔_
 - 世界地图 World Map in Miller Cylindrical Projection
 
 
-#### 南极探险 导弹和 航空？—— 基于方位角的投影
+### 南极探险 导弹和 航空？—— 基于方位角的投影
 
 
 圆柱投影的另一个问题在于对于两点之间的方位和距离计算的错误。我们再举南极洲的极端例子，倘若在南极洲内探险，有不同的AB两点，如何判断从A到B要走多远、什么方位，上图似乎也并不能给出一个直观的答案。
@@ -125,7 +125,7 @@ _——鹅仔_
 ![LondonMap](/static/images/science/LondonMap.png)
 - 伦敦出发等距航线图 - 作者自制
 
-#### 给地球寻找甜筒皮… 基于圆锥的投影
+### 给地球寻找甜筒皮… 基于圆锥的投影
 
 当然，极坐标投影有趣是有趣，但这些距离终究是基于一个圆心的，其使用的场景实在是太过局限。（我们总不能每到一个地方就重新投影吧。-怎么不行呢）。
 
@@ -149,9 +149,10 @@ _——鹅仔_
 ![Lambert](/static/images/science/Lambert_conformal_conic_projection_SW.jpg)
 
 - 世界地图 Lambert Conformal Projection
-#### 折中一下吧——Robinson和Mollweide 
 
-看来，使用其他规则曲面投影后都让地球变得”虽然准确“，"但是陌生"了…，那么要不就寻找一个别的平面形状呢？
+### 折中一下吧——Robinson和Mollweide 
+
+看来，使用其他规则曲面投影后都让地球变得"虽然准确"，"但是陌生"了…，那么要不就寻找一个别的平面形状呢？
 
 ![Earth_reversed](/static/images/science/Earth_reversed.gif)
 - 从Mercator 到Robinson 再到 Mollweide - 作者自制
@@ -172,7 +173,7 @@ _——鹅仔_
 
 然而，面积上虽然Mollweide更准确，但是不得不说，形状却有些失真，因而，在日常生活中还是Robinson这样既保全了形状又让距离得以接近真实情况的版本得以广泛使用了。
 
-#### 将球拆成橘子皮：从Goode homolosine 到UTM
+### 将球拆成橘子皮：从Goode homolosine 到UTM
 
 当然，既然是球面，为什么总想着投影到一个完整的形状上呢？为什么不投影变换到到多个形状上再展开呢。
 
@@ -192,7 +193,7 @@ UTM系统将世界每6度分了一个区，也就是60个区（见上图），�
 
 这样在不同纬度上，6度所跨越的长度逐渐从赤道向两级递减。根据这个，我们便可以进行从地理经纬坐标到长度坐标的转换。我们平常使用的不同国家地区的GIS数据，如果是采用UTM的坐标系统，通常会给一个类似于UTM-30N这样的代码，这正是其数据库所使用的”球皮编号“啦。有了这个编号，我们就可以找到将坐标的x y和经纬度之间转换的方法。尽管拟合的误差依旧存在，但是在6度的区间已经允许该系统在城市以及区域工程的尺度上被广泛使用。
 
-#### 小结
+### 小结
 
 总而言之，世界上没有完美的地图，亦没有完全正确的地图，有的只是适合某一个场景、用途的地图。或许有人会在家里挂一张Goode Homolosine，图个艺术效果和陌生感。但更多的人会选择Robinson这样看着形状中规中矩没有离谱变形虽然面积距离全都不太正确的地图。又或者你要去南极，选择极坐标地图就好了。最终我们只是要选择一个在某个情境、或是某个尺度下能够为你的工作带来便利的投影方法。
 
