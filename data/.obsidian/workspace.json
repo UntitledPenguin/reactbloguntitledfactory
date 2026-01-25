@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/W2003-WorldMAP.mdx",
+                "file": "blog/W2004-Lost.mdx",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "W2003-WorldMAP"
+              "title": "W2004-Lost"
             }
           }
         ]
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "a3171e07e35c8e9b",
@@ -169,27 +168,27 @@
   },
   "active": "be26e5b3e32bf721",
   "lastOpenFiles": [
+    "blog/W2002-Uchuujin.mdx",
+    "blog/W2004-Lost.mdx",
+    "blog/W2001-My2025.mdx",
+    "blog/W2003-WorldMAP.mdx",
+    "blog/WX0X-Template.mdx",
     "UTM.png",
     "LondonMap.png",
     "NK.png",
     "WGS_84_reference.png",
-    "blog/W2002-Uchuujin.mdx",
-    "blog/W2003-WorldMAP.mdx",
     "Utm-latlon_grid_en.svg 1.png",
     "secant conic 1.gif",
     "sc_projections_lcc 1.png",
     "Robinson_projection_SW 1.jpg",
     "reversed cylinder 1.gif",
     "Oranges 1.png",
-    "Mollweide_projection_SW 1.jpg",
-    "blog/W2001-My2025.mdx",
     "blog/W1502-ConvolutionalNN-B.mdx",
     "blog/W1501-ConvolutionalNN.mdx",
     "AlexNet-1.md",
     "blog/W801-LogsticinPython.mdx",
     "blog/W601-LogisticRegression.mdx",
     "blog/W1001-NeuralNetwork02.mdx",
-    "blog/W901-NeuralNetwork01.mdx",
-    "blog/W803-Regularization.mdx"
+    "blog/W901-NeuralNetwork01.mdx"
   ]
 }
