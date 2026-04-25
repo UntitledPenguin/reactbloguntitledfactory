@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/W2007-ibuprofen.mdx",
+                "file": "blog/W2008-tumbler.mdx",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "W2007-ibuprofen"
+              "title": "W2008-tumbler"
             }
           }
         ],
@@ -183,10 +183,11 @@
   },
   "active": "c5eb64a880dc107f",
   "lastOpenFiles": [
+    "blog/WX0X-Template.mdx",
+    "blog/W2007-ibuprofen.mdx",
+    "blog/W2008-tumbler.mdx",
     "blog/W2006-LUCKYME.mdx",
     "blog/W2004-Lost.mdx",
-    "blog/W2007-ibuprofen.mdx",
-    "blog/WX0X-Template.mdx",
     "blog/W2005-ZOO.mdx",
     "blog/W206-LUCKYME.mdx",
     "blog/W2002-Uchuujin.mdx",
@@ -203,7 +204,6 @@
     "reversed cylinder 1.gif",
     "Oranges 1.png",
     "blog/W1502-ConvolutionalNN-B.mdx",
-    "blog/W1501-ConvolutionalNN.mdx",
     "AlexNet-1.md"
   ]
 }
