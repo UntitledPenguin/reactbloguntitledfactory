@@ -138,6 +138,7 @@ export const Authors = defineDocumentType(() => ({
     twitter: { type: 'string' },
     linkedin: { type: 'string' },
     SSpai: { type: 'string' },
+    Youtube: { type: 'string' }, 
     github: { type: 'string' },
     layout: { type: 'string' },
   },
