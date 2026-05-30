@@ -1,5 +1,3 @@
-const { Youtube, Mastodon } = require("@/components/social-icons/icons")
-
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
   title: 'UntitledPenguin Factory——某未知鹅工厂',
