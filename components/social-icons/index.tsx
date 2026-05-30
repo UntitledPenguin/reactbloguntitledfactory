@@ -20,7 +20,7 @@ const components = {
   linkedin: Linkedin,
   twitter: Twitter,
   x: X,
-  SSpai:SSPai,
+  SSpai: SSPai,
   mastodon: Mastodon,
   threads: Threads,
   instagram: Instagram,

@@ -103,4 +103,3 @@ export function SSPai(svgProps: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
-
