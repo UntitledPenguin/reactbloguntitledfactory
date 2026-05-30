@@ -6,8 +6,8 @@ const siteMetadata = {
   description: 'Documentation of My Ideas, Ideating, Solutions and Overthinking.',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
-  siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',
+  siteUrl: 'https://upfactory.vercel.app/',
+  siteRepo: 'https://upfactory.vercel.app/',
   siteLogo: '/static/images/logoX.png',
   socialBanner: '/static/images/New_twitter-card.png',
   email: 'qramisw@gmail.com',
