@@ -1,3 +1,5 @@
+const { Youtube, Mastodon } = require("@/components/social-icons/icons")
+
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
   title: 'UntitledPenguin Factory——某未知鹅工厂',
@@ -11,9 +13,12 @@ const siteMetadata = {
   siteLogo: '/static/images/logoX.png',
   socialBanner: '/static/images/twitter-card.png',
   email: 'qramisw@gmail.com',
-  github: 'https://github.com',
+  github: 'https://github.com/UntitledPenguin',
+  Sspai:'https://sspai.com/u/mcng6cj0/updates',
+  Youtube:'https://www.youtube.com/watch?v=FPvSfyuYQPQ',
+  Mastodon:'@UntitledPenguin@mastodon.socia',
   // twitter: 'https://twitter.com/Twitter',
-  locale: 'en-UK',
+  locale: 'En-UK',
   analytics: {
     // If you want to use an analytics provider you have to add it to the
     // content security policy in the `next.config.js` file.

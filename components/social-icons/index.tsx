@@ -8,6 +8,7 @@ import {
   X,
   Mastodon,
   Threads,
+  SSPai,
   Instagram,
 } from './icons'
 
@@ -19,6 +20,7 @@ const components = {
   linkedin: Linkedin,
   twitter: Twitter,
   x: X,
+  SSpai:SSPai,
   mastodon: Mastodon,
   threads: Threads,
   instagram: Instagram,

@@ -7,16 +7,17 @@ interface Project {
 
 const projectsData: Project[] = [
   {
-    title: 'Python小项目| A Sudoku Solver',
-    description: `A high-performance Sudoku solver utilizing Depth-First Search (DFS) and hash tables.Running time listed among top 1% on Leetcode. Click to take a look`,
-    imgSrc: '/static/images/Sudoku.jpg',
-    href: '/blog/W302-Sudoku',
+    title: '少数派写作| P人的时间管理实践',
+    description: `How do we overcome procratination`,
+    imgSrc: '/static/images/productive.png',
+    href: 'https://sspai.com/post/95280',
   },
+
   {
-    title: 'GH工作流 | A Computational Workflow for urban planning project data management',
-    description: `See the exploration of using Rhino and Grasshopper in my work as a masterplanner.`,
-    imgSrc: '/static/images/Workflow.jpg',
-    href: 'https://www.linkedin.com/posts/jiaqi-wang-ramis_grasshopper-rhino-urbanplanningworkflow-activity-7199515469085638656-3a_Y?utm_source=share&utm_medium=member_desktop',
+    title: 'Pelicanflow | My urbanist toolbox',
+    description: `Pelicanflow is a platform where I document my latest toolkit for urban design and urban data analysis.`,
+    imgSrc: '/static/images/pelicanflow.jpg',
+    href: 'https://pelicanflowspace.vercel.app/',
   },
 ]
 

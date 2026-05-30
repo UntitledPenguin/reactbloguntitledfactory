@@ -22,6 +22,7 @@ import rehypePrismPlus from 'rehype-prism-plus'
 import rehypePresetMinify from 'rehype-preset-minify'
 import siteMetadata from './data/siteMetadata'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
+import { SSPai } from './components/social-icons/icons'
 
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
@@ -136,6 +137,7 @@ export const Authors = defineDocumentType(() => ({
     email: { type: 'string' },
     twitter: { type: 'string' },
     linkedin: { type: 'string' },
+    SSpai: { type: 'string' },
     github: { type: 'string' },
     layout: { type: 'string' },
   },
