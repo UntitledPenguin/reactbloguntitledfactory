@@ -20,23 +20,8 @@
               "icon": "lucide-file",
               "title": "W2004-Lost"
             }
-          },
-          {
-            "id": "c5eb64a880dc107f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "blog/W2008-tumbler.mdx",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "W2008-tumbler"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -181,11 +166,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "c5eb64a880dc107f",
+  "active": "be26e5b3e32bf721",
   "lastOpenFiles": [
+    "blog/W2009-NOWHERE.mdx",
+    "blog/W2008-tumbler.mdx",
     "blog/WX0X-Template.mdx",
     "blog/W2007-ibuprofen.mdx",
-    "blog/W2008-tumbler.mdx",
     "blog/W2006-LUCKYME.mdx",
     "blog/W2004-Lost.mdx",
     "blog/W2005-ZOO.mdx",
@@ -203,7 +189,6 @@
     "Robinson_projection_SW 1.jpg",
     "reversed cylinder 1.gif",
     "Oranges 1.png",
-    "blog/W1502-ConvolutionalNN-B.mdx",
     "AlexNet-1.md"
   ]
 }
