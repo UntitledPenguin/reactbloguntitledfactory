@@ -1,5 +1,5 @@
 import { defineDocumentType, ComputedFields, makeSource } from 'contentlayer2/source-files'
-import { writeFileSync } from 'fs'
+import { readdirSync, readFileSync, writeFileSync } from 'fs'
 import readingTime from 'reading-time'
 import { slug } from 'github-slugger'
 import path from 'path'
@@ -89,6 +89,33 @@ function createSearchIndex(allBlogs) {
   }
 }
 
+function fixContentlayerJsonImports() {
+  const generatedDir = path.join(root, '.contentlayer', 'generated')
+  const oldSyntax = " assert { type: 'json' }"
+  const newSyntax = " with { type: 'json' }"
+
+  function updateFile(filePath: string) {
+    const source = readFileSync(filePath, 'utf8')
+    if (!source.includes(oldSyntax)) return
+
+    writeFileSync(filePath, source.replaceAll(oldSyntax, newSyntax))
+  }
+
+  function walk(dir: string) {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const entryPath = path.join(dir, entry.name)
+
+      if (entry.isDirectory()) {
+        walk(entryPath)
+      } else if (entry.isFile() && entry.name.endsWith('.mjs')) {
+        updateFile(entryPath)
+      }
+    }
+  }
+
+  walk(generatedDir)
+}
+
 export const Blog = defineDocumentType(() => ({
   name: 'Blog',
   filePathPattern: 'blog/**/*.mdx',
@@ -176,6 +203,7 @@ export default makeSource({
     ],
   },
   onSuccess: async (importData) => {
+    fixContentlayerJsonImports()
     const { allBlogs } = await importData()
     createTagCount(allBlogs)
     createSearchIndex(allBlogs)
